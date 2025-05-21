@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 
+// import { useAuth } from "../auth"
 const HomePage = () => {
+  // const auth = useAuth();
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800">
+    <div  className="min-h-screen bg-gray-100 text-gray-800">
       {/* Hero Section */}
       <header className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">

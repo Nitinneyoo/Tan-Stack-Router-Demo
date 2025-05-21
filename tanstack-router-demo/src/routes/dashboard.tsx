@@ -1,18 +1,16 @@
-import { createFileRoute, Outlet, Link } from '@tanstack/react-router';
-
-
+import { createFileRoute, Outlet, Link } from '@tanstack/react-router'; // Replace with your actual authentication logic
 
 const DashboardLayout = () => {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
       <header className="bg-gray-300 text-gray-800 p-4">
-        <Link to = "/Dashboard"className="text-2xl">Dashboard</Link>
+        <Link to="/dashboard" className="text-2xl">Dashboard</Link>
       </header>
       <div className="flex flex-1 overflow-auto bg-gray-200">
         {/* Sidebar */}
-        <aside className="w-64 bg-white text-gray-800 p-4">
-          <nav>
+        <aside className="w-64 bg-white text-gray-800 p-4 flex flex-col">
+          <nav >
             <ul>
               <li>
                 <Link to="/dashboard" activeProps={{ className: 'font-bold' }}>
