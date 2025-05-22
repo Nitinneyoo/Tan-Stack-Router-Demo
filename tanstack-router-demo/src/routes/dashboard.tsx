@@ -13,18 +13,39 @@ const DashboardLayout = () => {
           <nav >
             <ul>
               <li>
-                <Link to="/dashboard" activeProps={{ className: 'font-bold' }}>
-                  Home
+                <Link
+                  to="/dashboard"
+                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  activeProps={{
+                    className:
+                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                  }}
+                >
+                  Robot
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/overview" activeProps={{ className: 'font-bold' }}>
+                <Link
+                  to="/dashboard/overview"
+                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
+                  activeProps={{
+                    className:
+                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                  }}
+                >
                   Overview
                 </Link>
               </li>
-              <li>
-                <Link to="/dashboard/settings" activeProps={{ className: 'font-bold' }}>
-                  Settings
+               <li>
+                <Link
+                  to="/dashboard/settings"
+                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
+                  activeProps={{
+                    className:
+                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                  }}
+                >
+                  Setting
                 </Link>
               </li>
             </ul>
@@ -39,7 +60,7 @@ const DashboardLayout = () => {
   );
 }
 
-export const Route = createFileRoute('/dashboard')({
+export const Route = createFileRoute('/Dashboard')({
   component: DashboardLayout,
 });
 export default DashboardLayout;

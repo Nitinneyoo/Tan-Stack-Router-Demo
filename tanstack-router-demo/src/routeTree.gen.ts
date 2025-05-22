@@ -11,26 +11,22 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as DashboardImport } from './routes/dashboard'
 import { Route as LoginImport } from './routes/Login'
 import { Route as FleetImport } from './routes/Fleet'
+import { Route as DashboardImport } from './routes/Dashboard'
 import { Route as ContactImport } from './routes/Contact'
 import { Route as ConfigureImport } from './routes/Configure'
 import { Route as IndexImport } from './routes/index'
-import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as FleetIndexImport } from './routes/Fleet/index'
-import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
-import { Route as DashboardOverviewImport } from './routes/dashboard/overview'
+import { Route as DashboardIndexImport } from './routes/Dashboard/index'
+import { Route as ConfigureIndexImport } from './routes/Configure/index'
 import { Route as FleetAddRobotImport } from './routes/Fleet/addRobot'
-import { Route as ConfigureIndexImport } from './routes/Configure/Index'
+import { Route as DashboardSettingsImport } from './routes/Dashboard/settings'
+import { Route as DashboardOverviewImport } from './routes/Dashboard/overview'
+import { Route as ConfigureMapImport } from './routes/Configure/map'
+import { Route as ConfigureAutomationImport } from './routes/Configure/automation'
 
 // Create/Update Routes
-
-const DashboardRoute = DashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LoginRoute = LoginImport.update({
   id: '/Login',
@@ -41,6 +37,12 @@ const LoginRoute = LoginImport.update({
 const FleetRoute = FleetImport.update({
   id: '/Fleet',
   path: '/Fleet',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardRoute = DashboardImport.update({
+  id: '/Dashboard',
+  path: '/Dashboard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -62,15 +64,27 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const FleetIndexRoute = FleetIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FleetRoute,
+} as any)
+
 const DashboardIndexRoute = DashboardIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const FleetIndexRoute = FleetIndexImport.update({
+const ConfigureIndexRoute = ConfigureIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ConfigureRoute,
+} as any)
+
+const FleetAddRobotRoute = FleetAddRobotImport.update({
+  id: '/addRobot',
+  path: '/addRobot',
   getParentRoute: () => FleetRoute,
 } as any)
 
@@ -86,15 +100,15 @@ const DashboardOverviewRoute = DashboardOverviewImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const FleetAddRobotRoute = FleetAddRobotImport.update({
-  id: '/addRobot',
-  path: '/addRobot',
-  getParentRoute: () => FleetRoute,
+const ConfigureMapRoute = ConfigureMapImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => ConfigureRoute,
 } as any)
 
-const ConfigureIndexRoute = ConfigureIndexImport.update({
-  id: '/Index',
-  path: '/Index',
+const ConfigureAutomationRoute = ConfigureAutomationImport.update({
+  id: '/automation',
+  path: '/automation',
   getParentRoute: () => ConfigureRoute,
 } as any)
 
@@ -123,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactImport
       parentRoute: typeof rootRoute
     }
+    '/Dashboard': {
+      id: '/Dashboard'
+      path: '/Dashboard'
+      fullPath: '/Dashboard'
+      preLoaderRoute: typeof DashboardImport
+      parentRoute: typeof rootRoute
+    }
     '/Fleet': {
       id: '/Fleet'
       path: '/Fleet'
@@ -137,19 +158,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardImport
-      parentRoute: typeof rootRoute
-    }
-    '/Configure/Index': {
-      id: '/Configure/Index'
-      path: '/Index'
-      fullPath: '/Configure/Index'
-      preLoaderRoute: typeof ConfigureIndexImport
+    '/Configure/automation': {
+      id: '/Configure/automation'
+      path: '/automation'
+      fullPath: '/Configure/automation'
+      preLoaderRoute: typeof ConfigureAutomationImport
       parentRoute: typeof ConfigureImport
+    }
+    '/Configure/map': {
+      id: '/Configure/map'
+      path: '/map'
+      fullPath: '/Configure/map'
+      preLoaderRoute: typeof ConfigureMapImport
+      parentRoute: typeof ConfigureImport
+    }
+    '/Dashboard/overview': {
+      id: '/Dashboard/overview'
+      path: '/overview'
+      fullPath: '/Dashboard/overview'
+      preLoaderRoute: typeof DashboardOverviewImport
+      parentRoute: typeof DashboardImport
+    }
+    '/Dashboard/settings': {
+      id: '/Dashboard/settings'
+      path: '/settings'
+      fullPath: '/Dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsImport
+      parentRoute: typeof DashboardImport
     }
     '/Fleet/addRobot': {
       id: '/Fleet/addRobot'
@@ -158,18 +193,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FleetAddRobotImport
       parentRoute: typeof FleetImport
     }
-    '/dashboard/overview': {
-      id: '/dashboard/overview'
-      path: '/overview'
-      fullPath: '/dashboard/overview'
-      preLoaderRoute: typeof DashboardOverviewImport
-      parentRoute: typeof DashboardImport
+    '/Configure/': {
+      id: '/Configure/'
+      path: '/'
+      fullPath: '/Configure/'
+      preLoaderRoute: typeof ConfigureIndexImport
+      parentRoute: typeof ConfigureImport
     }
-    '/dashboard/settings': {
-      id: '/dashboard/settings'
-      path: '/settings'
-      fullPath: '/dashboard/settings'
-      preLoaderRoute: typeof DashboardSettingsImport
+    '/Dashboard/': {
+      id: '/Dashboard/'
+      path: '/'
+      fullPath: '/Dashboard/'
+      preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof DashboardImport
     }
     '/Fleet/': {
@@ -179,41 +214,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FleetIndexImport
       parentRoute: typeof FleetImport
     }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof DashboardIndexImport
-      parentRoute: typeof DashboardImport
-    }
   }
 }
 
 // Create and export the route tree
 
 interface ConfigureRouteChildren {
+  ConfigureAutomationRoute: typeof ConfigureAutomationRoute
+  ConfigureMapRoute: typeof ConfigureMapRoute
   ConfigureIndexRoute: typeof ConfigureIndexRoute
 }
 
 const ConfigureRouteChildren: ConfigureRouteChildren = {
+  ConfigureAutomationRoute: ConfigureAutomationRoute,
+  ConfigureMapRoute: ConfigureMapRoute,
   ConfigureIndexRoute: ConfigureIndexRoute,
 }
 
 const ConfigureRouteWithChildren = ConfigureRoute._addFileChildren(
   ConfigureRouteChildren,
 )
-
-interface FleetRouteChildren {
-  FleetAddRobotRoute: typeof FleetAddRobotRoute
-  FleetIndexRoute: typeof FleetIndexRoute
-}
-
-const FleetRouteChildren: FleetRouteChildren = {
-  FleetAddRobotRoute: FleetAddRobotRoute,
-  FleetIndexRoute: FleetIndexRoute,
-}
-
-const FleetRouteWithChildren = FleetRoute._addFileChildren(FleetRouteChildren)
 
 interface DashboardRouteChildren {
   DashboardOverviewRoute: typeof DashboardOverviewRoute
@@ -231,32 +251,47 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface FleetRouteChildren {
+  FleetAddRobotRoute: typeof FleetAddRobotRoute
+  FleetIndexRoute: typeof FleetIndexRoute
+}
+
+const FleetRouteChildren: FleetRouteChildren = {
+  FleetAddRobotRoute: FleetAddRobotRoute,
+  FleetIndexRoute: FleetIndexRoute,
+}
+
+const FleetRouteWithChildren = FleetRoute._addFileChildren(FleetRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Configure': typeof ConfigureRouteWithChildren
   '/Contact': typeof ContactRoute
+  '/Dashboard': typeof DashboardRouteWithChildren
   '/Fleet': typeof FleetRouteWithChildren
   '/Login': typeof LoginRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/Configure/Index': typeof ConfigureIndexRoute
+  '/Configure/automation': typeof ConfigureAutomationRoute
+  '/Configure/map': typeof ConfigureMapRoute
+  '/Dashboard/overview': typeof DashboardOverviewRoute
+  '/Dashboard/settings': typeof DashboardSettingsRoute
   '/Fleet/addRobot': typeof FleetAddRobotRoute
-  '/dashboard/overview': typeof DashboardOverviewRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/Configure/': typeof ConfigureIndexRoute
+  '/Dashboard/': typeof DashboardIndexRoute
   '/Fleet/': typeof FleetIndexRoute
-  '/dashboard/': typeof DashboardIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/Configure': typeof ConfigureRouteWithChildren
   '/Contact': typeof ContactRoute
   '/Login': typeof LoginRoute
-  '/Configure/Index': typeof ConfigureIndexRoute
+  '/Configure/automation': typeof ConfigureAutomationRoute
+  '/Configure/map': typeof ConfigureMapRoute
+  '/Dashboard/overview': typeof DashboardOverviewRoute
+  '/Dashboard/settings': typeof DashboardSettingsRoute
   '/Fleet/addRobot': typeof FleetAddRobotRoute
-  '/dashboard/overview': typeof DashboardOverviewRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/Configure': typeof ConfigureIndexRoute
+  '/Dashboard': typeof DashboardIndexRoute
   '/Fleet': typeof FleetIndexRoute
-  '/dashboard': typeof DashboardIndexRoute
 }
 
 export interface FileRoutesById {
@@ -264,15 +299,17 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/Configure': typeof ConfigureRouteWithChildren
   '/Contact': typeof ContactRoute
+  '/Dashboard': typeof DashboardRouteWithChildren
   '/Fleet': typeof FleetRouteWithChildren
   '/Login': typeof LoginRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/Configure/Index': typeof ConfigureIndexRoute
+  '/Configure/automation': typeof ConfigureAutomationRoute
+  '/Configure/map': typeof ConfigureMapRoute
+  '/Dashboard/overview': typeof DashboardOverviewRoute
+  '/Dashboard/settings': typeof DashboardSettingsRoute
   '/Fleet/addRobot': typeof FleetAddRobotRoute
-  '/dashboard/overview': typeof DashboardOverviewRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/Configure/': typeof ConfigureIndexRoute
+  '/Dashboard/': typeof DashboardIndexRoute
   '/Fleet/': typeof FleetIndexRoute
-  '/dashboard/': typeof DashboardIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -281,41 +318,46 @@ export interface FileRouteTypes {
     | '/'
     | '/Configure'
     | '/Contact'
+    | '/Dashboard'
     | '/Fleet'
     | '/Login'
-    | '/dashboard'
-    | '/Configure/Index'
+    | '/Configure/automation'
+    | '/Configure/map'
+    | '/Dashboard/overview'
+    | '/Dashboard/settings'
     | '/Fleet/addRobot'
-    | '/dashboard/overview'
-    | '/dashboard/settings'
+    | '/Configure/'
+    | '/Dashboard/'
     | '/Fleet/'
-    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/Configure'
     | '/Contact'
     | '/Login'
-    | '/Configure/Index'
+    | '/Configure/automation'
+    | '/Configure/map'
+    | '/Dashboard/overview'
+    | '/Dashboard/settings'
     | '/Fleet/addRobot'
-    | '/dashboard/overview'
-    | '/dashboard/settings'
+    | '/Configure'
+    | '/Dashboard'
     | '/Fleet'
-    | '/dashboard'
   id:
     | '__root__'
     | '/'
     | '/Configure'
     | '/Contact'
+    | '/Dashboard'
     | '/Fleet'
     | '/Login'
-    | '/dashboard'
-    | '/Configure/Index'
+    | '/Configure/automation'
+    | '/Configure/map'
+    | '/Dashboard/overview'
+    | '/Dashboard/settings'
     | '/Fleet/addRobot'
-    | '/dashboard/overview'
-    | '/dashboard/settings'
+    | '/Configure/'
+    | '/Dashboard/'
     | '/Fleet/'
-    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 
@@ -323,18 +365,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConfigureRoute: typeof ConfigureRouteWithChildren
   ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   FleetRoute: typeof FleetRouteWithChildren
   LoginRoute: typeof LoginRoute
-  DashboardRoute: typeof DashboardRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConfigureRoute: ConfigureRouteWithChildren,
   ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   FleetRoute: FleetRouteWithChildren,
   LoginRoute: LoginRoute,
-  DashboardRoute: DashboardRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -350,9 +392,9 @@ export const routeTree = rootRoute
         "/",
         "/Configure",
         "/Contact",
+        "/Dashboard",
         "/Fleet",
-        "/Login",
-        "/dashboard"
+        "/Login"
       ]
     },
     "/": {
@@ -361,11 +403,21 @@ export const routeTree = rootRoute
     "/Configure": {
       "filePath": "Configure.tsx",
       "children": [
-        "/Configure/Index"
+        "/Configure/automation",
+        "/Configure/map",
+        "/Configure/"
       ]
     },
     "/Contact": {
       "filePath": "Contact.tsx"
+    },
+    "/Dashboard": {
+      "filePath": "Dashboard.tsx",
+      "children": [
+        "/Dashboard/overview",
+        "/Dashboard/settings",
+        "/Dashboard/"
+      ]
     },
     "/Fleet": {
       "filePath": "Fleet.tsx",
@@ -377,37 +429,37 @@ export const routeTree = rootRoute
     "/Login": {
       "filePath": "Login.tsx"
     },
-    "/dashboard": {
-      "filePath": "dashboard.tsx",
-      "children": [
-        "/dashboard/overview",
-        "/dashboard/settings",
-        "/dashboard/"
-      ]
-    },
-    "/Configure/Index": {
-      "filePath": "Configure/Index.tsx",
+    "/Configure/automation": {
+      "filePath": "Configure/automation.tsx",
       "parent": "/Configure"
+    },
+    "/Configure/map": {
+      "filePath": "Configure/map.tsx",
+      "parent": "/Configure"
+    },
+    "/Dashboard/overview": {
+      "filePath": "Dashboard/overview.tsx",
+      "parent": "/Dashboard"
+    },
+    "/Dashboard/settings": {
+      "filePath": "Dashboard/settings.tsx",
+      "parent": "/Dashboard"
     },
     "/Fleet/addRobot": {
       "filePath": "Fleet/addRobot.tsx",
       "parent": "/Fleet"
     },
-    "/dashboard/overview": {
-      "filePath": "dashboard/overview.tsx",
-      "parent": "/dashboard"
+    "/Configure/": {
+      "filePath": "Configure/index.tsx",
+      "parent": "/Configure"
     },
-    "/dashboard/settings": {
-      "filePath": "dashboard/settings.tsx",
-      "parent": "/dashboard"
+    "/Dashboard/": {
+      "filePath": "Dashboard/index.tsx",
+      "parent": "/Dashboard"
     },
     "/Fleet/": {
       "filePath": "Fleet/index.tsx",
       "parent": "/Fleet"
-    },
-    "/dashboard/": {
-      "filePath": "dashboard/index.tsx",
-      "parent": "/dashboard"
     }
   }
 }

@@ -20,14 +20,16 @@ const loginSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-const signupSchema = z.object({
-  email: z.string().email("Invalid email format"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string().min(6, "Confirm password is required"),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
+const signupSchema = z
+  .object({
+    email: z.string().email("Invalid email format"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string().min(6, "Confirm password is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 type LoginData = z.infer<typeof loginSchema>;
 type SignupData = z.infer<typeof signupSchema>;
@@ -45,7 +47,10 @@ const fieldVariants = {
 
 const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
-  const [loginData, setLoginData] = useState<LoginData>({ email: "", password: "" });
+  const [loginData, setLoginData] = useState<LoginData>({
+    email: "",
+    password: "",
+  });
   const [signupData, setSignupData] = useState<SignupData>({
     email: "",
     password: "",
@@ -78,7 +83,10 @@ const LoginPage = () => {
         loginData.email === DEFAULT_CREDENTIALS.username &&
         loginData.password === DEFAULT_CREDENTIALS.password
       ) {
-        sessionStorage.setItem("dummyAuth", JSON.stringify({ email: loginData.email }));
+        sessionStorage.setItem(
+          "dummyAuth",
+          JSON.stringify({ email: loginData.email })
+        );
         window.dispatchEvent(new Event("authStateChanged"));
         return;
       }
@@ -89,7 +97,10 @@ const LoginPage = () => {
         storedUsers[loginData.email] &&
         storedUsers[loginData.email].password === loginData.password
       ) {
-        sessionStorage.setItem("dummyAuth", JSON.stringify({ email: loginData.email }));
+        sessionStorage.setItem(
+          "dummyAuth",
+          JSON.stringify({ email: loginData.email })
+        );
         window.dispatchEvent(new Event("authStateChanged"));
         return;
       }
@@ -98,6 +109,7 @@ const LoginPage = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: FormErrors = {};
+        // biome-ignore lint/complexity/noForEach: <explanation>
         error.errors.forEach((err) => {
           if (err.path[0]) {
             newErrors[err.path[0] as keyof LoginData] = err.message;
@@ -124,7 +136,10 @@ const LoginPage = () => {
       sessionStorage.setItem("users", JSON.stringify(storedUsers));
 
       // Auto-login after sign-up
-      sessionStorage.setItem("dummyAuth", JSON.stringify({ email: signupData.email }));
+      sessionStorage.setItem(
+        "dummyAuth",
+        JSON.stringify({ email: signupData.email })
+      );
       window.dispatchEvent(new Event("authStateChanged"));
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -160,24 +175,35 @@ const LoginPage = () => {
           className="max-w-md w-full bg-white/95 dark:bg-gray-800/95 p-8 rounded-2xl shadow-2xl border border-blue-200/30 dark:border-blue-800/30 backdrop-blur-lg"
         >
           <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center">
-            {isSignup ? "Sign Up for ANSCER Robotics" : "Login to ANSCER Robotics"}
+            {isSignup
+              ? "Sign Up for ANSCER Robotics"
+              : "Login to ANSCER Robotics"}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
             {isSignup
               ? "Create your account to join the automation revolution."
               : "Access your account to explore our solutions."}
             {!isSignup && (
-              <span className="block mt-1 text-xs text-gray-500">
-                
-              </span>
+              <span className="block mt-1 text-xs text-gray-500"></span>
             )}
           </p>
 
           {/* Form */}
-          <form onSubmit={isSignup ? handleSignup : handleLogin} className="mt-6 space-y-6">
+          <form
+            onSubmit={isSignup ? handleSignup : handleLogin}
+            className="mt-6 space-y-6"
+          >
             {/* Email Field */}
-            <motion.div variants={fieldVariants} custom={0} initial="hidden" animate="visible">
-              <Label htmlFor="email" className="text-gray-800 dark:text-gray-100 font-semibold">
+            <motion.div
+              variants={fieldVariants}
+              custom={0}
+              initial="hidden"
+              animate="visible"
+            >
+              <Label
+                htmlFor="email"
+                className="text-gray-800 dark:text-gray-100 font-semibold"
+              >
                 Email
               </Label>
               <div className="mt-2 relative group">
@@ -190,7 +216,7 @@ const LoginPage = () => {
                   placeholder="Your email"
                   className={cn(
                     "pl-10 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]",
-                    errors.email && "border-red-500 focus:ring-red-500",
+                    errors.email && "border-red-500 focus:ring-red-500"
                   )}
                 />
                 <Mail
@@ -213,8 +239,16 @@ const LoginPage = () => {
             </motion.div>
 
             {/* Password Field */}
-            <motion.div variants={fieldVariants} custom={1} initial="hidden" animate="visible">
-              <Label htmlFor="password" className="text-gray-800 dark:text-gray-100 font-semibold">
+            <motion.div
+              variants={fieldVariants}
+              custom={1}
+              initial="hidden"
+              animate="visible"
+            >
+              <Label
+                htmlFor="password"
+                className="text-gray-800 dark:text-gray-100 font-semibold"
+              >
                 Password
               </Label>
               <div className="mt-2 relative group">
@@ -227,7 +261,7 @@ const LoginPage = () => {
                   placeholder="Your password"
                   className={cn(
                     "pl-10 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]",
-                    errors.password && "border-red-500 focus:ring-red-500",
+                    errors.password && "border-red-500 focus:ring-red-500"
                   )}
                 />
                 <User
@@ -251,7 +285,12 @@ const LoginPage = () => {
 
             {/* Confirm Password (Signup Only) */}
             {isSignup && (
-              <motion.div variants={fieldVariants} custom={2} initial="hidden" animate="visible">
+              <motion.div
+                variants={fieldVariants}
+                custom={2}
+                initial="hidden"
+                animate="visible"
+              >
                 <Label
                   htmlFor="confirmPassword"
                   className="text-gray-800 dark:text-gray-100 font-semibold"
@@ -268,7 +307,8 @@ const LoginPage = () => {
                     placeholder="Confirm your password"
                     className={cn(
                       "pl-10 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]",
-                      errors.confirmPassword && "border-red-500 focus:ring-red-500",
+                      errors.confirmPassword &&
+                        "border-red-500 focus:ring-red-500"
                     )}
                   />
                   <User
@@ -331,18 +371,22 @@ const LoginPage = () => {
           >
             <p className="text-sm text-gray-600 dark:text-gray-300">
               {isSignup ? "Already have an account?" : "Don't have an account?"}
-              <button
+              <Button
                 onClick={() => {
                   setIsSignup(!isSignup);
                   setErrors({});
                   setAuthError(null);
                   setLoginData({ email: "", password: "" });
-                  setSignupData({ email: "", password: "", confirmPassword: "" });
+                  setSignupData({
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                  });
                 }}
                 className="ml-1 text-blue-600 hover:text-blue-500 font-semibold"
               >
                 {isSignup ? "Login" : "Sign Up"}
-              </button>
+              </Button>
             </p>
           </motion.div>
         </motion.div>
