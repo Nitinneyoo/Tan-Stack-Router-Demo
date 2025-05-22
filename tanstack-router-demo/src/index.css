@@ -117,3 +117,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes particle {
+  0% { transform: translate(0, 0); opacity: 0.5; }
+  50% { transform: translate(20px, -20px); opacity: 0.8; }
+  100% { transform: translate(0, 0); opacity: 0.5; }
+}
+.animate-particle {
+  animation: particle 6s infinite ease-in-out;
+}
+.delay-300 { animation-delay: 0.3s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-900 { animation-delay: 0.9s; }
+
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 3s infinite ease-in-out;
+}

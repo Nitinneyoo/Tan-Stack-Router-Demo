@@ -52,7 +52,7 @@ const HomePage = () => {
         <h2 className="text-3xl font-bold mb-4">Ready to Automate with AnsCer?</h2>
         <p className="text-lg mb-6">Get in touch with us and discover how we can help revolutionize your operations.</p>
         <Link
-          to="/contact"
+          to="/Contact"
           className="inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow hover:bg-gray-100"
         >
           Contact Us

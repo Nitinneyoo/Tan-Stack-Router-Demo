@@ -14,9 +14,10 @@ import {
   Twitter,
   Linkedin,
   Home,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 
 // Zod schema for form validation
@@ -40,12 +41,14 @@ const fieldVariants = {
 };
 
 const ContactPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const isLoggedIn = !!JSON.parse(sessionStorage.getItem("dummyAuth") || "{}").email;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -59,7 +62,6 @@ const ContactPage = () => {
     e.preventDefault();
     try {
       contactSchema.parse(formData);
-      // Replace with your Formspree or API endpoint
       const response = await fetch("https://formspree.io/f/your-form-id", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -164,6 +166,29 @@ const ContactPage = () => {
       ),
       href: "https://www.linkedin.com/company/anscer-robotics",
     },
+    {
+      title: "Logout",
+      icon: (
+        <button
+          onClick={() => {
+            sessionStorage.removeItem("dummyAuth");
+            alert("Logged out successfully");
+            navigate({ to: "/Login", replace: true });
+          }}
+          disabled={!isLoggedIn}
+          aria-label="Logout"
+          className={cn(
+            "flex items-center justify-center",
+            isLoggedIn
+              ? "text-red-600 hover:text-red-500"
+              : "text-gray-600 opacity-50 cursor-not-allowed"
+          )}
+        >
+          <LogOut className="h-7 w-7 transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
+        </button>
+      ),
+      href: "#",
+    },
   ];
 
   return (
@@ -202,7 +227,7 @@ const ContactPage = () => {
           className="mb-8 text-center"
         >
           <p className="text-gray-700 dark:text-gray-300 text-lg">
-            At ANSCER Robotics, we’re revolutionizing industries with intelligent automation. Reach out to discuss partnerships, solutions, or inquiries.[](https://www.anscer.com/about)
+            At ANSCER Robotics, we’re revolutionizing industries with intelligent automation. Reach out to discuss partnerships, solutions, or inquiries.
           </p>
         </motion.div>
         <motion.form
