@@ -4,9 +4,9 @@ const DashboardLayout = () => {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <header className="bg-gray-300 text-gray-800 p-4">
+      {/* <header className="bg-gray-300 text-gray-800 p-4">
         <Link to="/dashboard" className="text-2xl">Dashboard</Link>
-      </header>
+      </header> */}
       <div className="flex flex-1 overflow-auto bg-gray-200">
         {/* Sidebar */}
         <aside className="w-64 bg-white text-gray-800 p-4 flex flex-col">
@@ -26,7 +26,7 @@ const DashboardLayout = () => {
               </li>
               <li>
                 <Link
-                  to="/dashboard/overview"
+                  to="/Dashboard/overview"
                   className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
                   activeProps={{
                     className:
@@ -38,7 +38,7 @@ const DashboardLayout = () => {
               </li>
                <li>
                 <Link
-                  to="/dashboard/settings"
+                  to="/Dashboard/settings"
                   className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
                   activeProps={{
                     className:

@@ -1,7 +1,8 @@
-
 import { createRootRoute, Link, Outlet, useNavigate, redirect } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+// import { Switch } from "@/components/ui/switch";
+// import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 export const Route = createRootRoute({
@@ -19,6 +20,25 @@ export const Route = createRootRoute({
     const [isLoggedIn, setIsLoggedIn] = useState(
       !!JSON.parse(sessionStorage.getItem("dummyAuth") || "{}").email
     );
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+      // Initialize from localStorage or system preference
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        return savedTheme === "dark";
+      }
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    });
+
+    // Apply dark mode class to <html> element
+    useEffect(() => {
+      if (isDarkMode) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+    }, [isDarkMode]);
 
     useEffect(() => {
       const handleDummyAuth = () => {
@@ -68,6 +88,16 @@ export const Route = createRootRoute({
             <Link to="/Contact" className="[&.active]:font-bold text-white">
               Contact
             </Link>
+            {/* <div className="flex items-center space-x-2">
+              <Switch
+                id="theme-toggle"
+                checked={isDarkMode}
+                onCheckedChange={(checked) => setIsDarkMode(checked)}
+              />
+              <Label htmlFor="theme-toggle" className="text-white">
+                {isDarkMode ? "Dark" : "Light"}
+              </Label>
+            </div> */}
             <Button
               onClick={handleLogout}
               disabled={!isLoggedIn}
@@ -90,7 +120,7 @@ export const Route = createRootRoute({
   notFoundComponent: () => (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
       <h1 className="text-4xl font-bold text-gray-800 dark:text-white">404 - Page Not Found</h1>
-      <Link to="/" className="mt-4 text-blue-600 hover:underline">
+      <Link to="/" className="mt-4 text-blue-600 dark:text-blue-400 hover:underline">
         Go to Home
       </Link>
     </div>

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -48,10 +49,11 @@ const ContactPage = () => {
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const isLoggedIn = !!JSON.parse(sessionStorage.getItem("dummyAuth") || "{}").email;
+  const isLoggedIn = !!JSON.parse(sessionStorage.getItem("dummyAuth") || "{}")
+    .email;
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -77,6 +79,7 @@ const ContactPage = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: FormErrors = {};
+        // biome-ignore lint/complexity/noForEach: <explanation>
         error.errors.forEach((err) => {
           if (err.path[0]) {
             newErrors[err.path[0] as keyof FormData] = err.message;
@@ -94,7 +97,11 @@ const ContactPage = () => {
     {
       title: "Home",
       icon: (
-        <Link to="/" aria-label="Home" className="flex items-center justify-center">
+        <Link
+          to="/"
+          aria-label="Home"
+          className="flex items-center justify-center"
+        >
           <Home className="h-7 w-7 text-blue-100 hover:text-blue-50 transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
         </Link>
       ),
@@ -103,7 +110,12 @@ const ContactPage = () => {
     {
       title: "Dashboard",
       icon: (
-        <Link to="/dashboard" aria-label="Dashboard" className="flex items-center justify-center">
+        <Link
+          to="/dashboard"
+          aria-label="Dashboard"
+          className="flex items-center justify-center"
+        >
+          {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
           <svg
             className="h-7 w-7 text-blue-100 hover:text-blue-50 transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]"
             fill="none"
@@ -169,7 +181,7 @@ const ContactPage = () => {
     {
       title: "Logout",
       icon: (
-        <button
+        <Button
           onClick={() => {
             sessionStorage.removeItem("dummyAuth");
             alert("Logged out successfully");
@@ -185,7 +197,7 @@ const ContactPage = () => {
           )}
         >
           <LogOut className="h-7 w-7 transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
-        </button>
+        </Button>
       ),
       href: "#",
     },
@@ -208,12 +220,14 @@ const ContactPage = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="bg-gradient-to-r from-blue-800 to-blue-600 dark:from-blue-950 dark:to-blue-900 shadow-xl"
       >
-        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight drop-shadow-md">
             Connect with ANSCER Robotics
           </h1>
           <p className="mt-4 text-lg sm:text-xl text-blue-100 dark:text-blue-200 font-medium max-w-3xl">
-            Pioneering the future of automation, we’re here to answer your questions and explore how our Hybrid AMRs can transform your operations.
+            Pioneering the future of automation, we’re here to answer your
+            questions and explore how our Hybrid AMRs can transform your
+            operations.
           </p>
         </div>
       </motion.header>
@@ -227,7 +241,9 @@ const ContactPage = () => {
           className="mb-8 text-center"
         >
           <p className="text-gray-700 dark:text-gray-300 text-lg">
-            At ANSCER Robotics, we’re revolutionizing industries with intelligent automation. Reach out to discuss partnerships, solutions, or inquiries.
+            At ANSCER Robotics, we’re revolutionizing industries with
+            intelligent automation. Reach out to discuss partnerships,
+            solutions, or inquiries.
           </p>
         </motion.div>
         <motion.form
@@ -238,8 +254,16 @@ const ContactPage = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {/* Name Field */}
-          <motion.div custom={0} variants={fieldVariants} initial="hidden" animate="visible">
-            <Label htmlFor="name" className="text-gray-800 dark:text-gray-100 font-semibold text-lg">
+          <motion.div
+            custom={0}
+            variants={fieldVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Label
+              htmlFor="name"
+              className="text-gray-800 dark:text-gray-100 font-semibold text-lg"
+            >
               Name
             </Label>
             <div className="mt-2 relative group">
@@ -252,7 +276,7 @@ const ContactPage = () => {
                 placeholder="Your name"
                 className={cn(
                   "pl-12 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] text-base sm:text-lg",
-                  errors.name && "border-red-500 focus:ring-red-500",
+                  errors.name && "border-red-500 focus:ring-red-500"
                 )}
               />
               <User
@@ -275,8 +299,16 @@ const ContactPage = () => {
           </motion.div>
 
           {/* Email Field */}
-          <motion.div custom={1} variants={fieldVariants} initial="hidden" animate="visible">
-            <Label htmlFor="email" className="text-gray-800 dark:text-gray-100 font-semibold text-lg">
+          <motion.div
+            custom={1}
+            variants={fieldVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Label
+              htmlFor="email"
+              className="text-gray-800 dark:text-gray-100 font-semibold text-lg"
+            >
               Email
             </Label>
             <div className="mt-2 relative group">
@@ -289,7 +321,7 @@ const ContactPage = () => {
                 placeholder="Your email"
                 className={cn(
                   "pl-12 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] text-base sm:text-lg",
-                  errors.email && "border-red-500 focus:ring-red-500",
+                  errors.email && "border-red-500 focus:ring-red-500"
                 )}
               />
               <Mail
@@ -312,8 +344,16 @@ const ContactPage = () => {
           </motion.div>
 
           {/* Message Field */}
-          <motion.div custom={2} variants={fieldVariants} initial="hidden" animate="visible">
-            <Label htmlFor="message" className="text-gray-800 dark:text-gray-100 font-semibold text-lg">
+          <motion.div
+            custom={2}
+            variants={fieldVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Label
+              htmlFor="message"
+              className="text-gray-800 dark:text-gray-100 font-semibold text-lg"
+            >
               Message
             </Label>
             <div className="mt-2 relative group">
@@ -326,7 +366,7 @@ const ContactPage = () => {
                 rows={5}
                 className={cn(
                   "pl-12 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] text-base sm:text-lg",
-                  errors.message && "border-red-500 focus:ring-red-500",
+                  errors.message && "border-red-500 focus:ring-red-500"
                 )}
               />
               <MessageSquare
@@ -349,7 +389,12 @@ const ContactPage = () => {
           </motion.div>
 
           {/* Submit Button */}
-          <motion.div custom={3} variants={fieldVariants} initial="hidden" animate="visible">
+          <motion.div
+            custom={3}
+            variants={fieldVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <Button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white py-3 sm:py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.8)] transition-all duration-300 animate-pulse-slow"
@@ -377,7 +422,7 @@ const ContactPage = () => {
   );
 };
 
-export const Route = createFileRoute('/Contact')({
+export const Route = createFileRoute("/Contact")({
   component: ContactPage,
 });
 export default ContactPage;

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";

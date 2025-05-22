@@ -229,7 +229,10 @@ export const Route = createFileRoute("/Configure/map")({
                   {mapData.map((row, rowIndex) =>
                     row.map((cell, colIndex) => (
                       <MapCell
-                        key={`${rowIndex}-${colIndex}`}
+                        key={`${rowIndex}-${
+                          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                          colIndex
+                        }`}
                         type={cell}
                         onClick={() => handleCellClick(rowIndex, colIndex)}
                         isSelected={

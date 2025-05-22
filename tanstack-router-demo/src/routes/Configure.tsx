@@ -11,7 +11,7 @@ const ConfigureLayout = () => {
         >
           configure
         </Link>
-      </header> 
+      </header>
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
