@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as FleetImport } from './routes/Fleet'
+import { Route as ContactImport } from './routes/Contact'
 import { Route as ConfigureImport } from './routes/Configure'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
@@ -33,6 +34,12 @@ const DashboardRoute = DashboardImport.update({
 const FleetRoute = FleetImport.update({
   id: '/Fleet',
   path: '/Fleet',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ContactRoute = ContactImport.update({
+  id: '/Contact',
+  path: '/Contact',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -100,6 +107,13 @@ declare module '@tanstack/react-router' {
       path: '/Configure'
       fullPath: '/Configure'
       preLoaderRoute: typeof ConfigureImport
+      parentRoute: typeof rootRoute
+    }
+    '/Contact': {
+      id: '/Contact'
+      path: '/Contact'
+      fullPath: '/Contact'
+      preLoaderRoute: typeof ContactImport
       parentRoute: typeof rootRoute
     }
     '/Fleet': {
@@ -206,6 +220,7 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Configure': typeof ConfigureRouteWithChildren
+  '/Contact': typeof ContactRoute
   '/Fleet': typeof FleetRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
   '/Configure/Index': typeof ConfigureIndexRoute
@@ -219,6 +234,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/Configure': typeof ConfigureRouteWithChildren
+  '/Contact': typeof ContactRoute
   '/Configure/Index': typeof ConfigureIndexRoute
   '/Fleet/addRobot': typeof FleetAddRobotRoute
   '/dashboard/overview': typeof DashboardOverviewRoute
@@ -231,6 +247,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/Configure': typeof ConfigureRouteWithChildren
+  '/Contact': typeof ContactRoute
   '/Fleet': typeof FleetRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
   '/Configure/Index': typeof ConfigureIndexRoute
@@ -246,6 +263,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/Configure'
+    | '/Contact'
     | '/Fleet'
     | '/dashboard'
     | '/Configure/Index'
@@ -258,6 +276,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/Configure'
+    | '/Contact'
     | '/Configure/Index'
     | '/Fleet/addRobot'
     | '/dashboard/overview'
@@ -268,6 +287,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/Configure'
+    | '/Contact'
     | '/Fleet'
     | '/dashboard'
     | '/Configure/Index'
@@ -282,6 +302,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConfigureRoute: typeof ConfigureRouteWithChildren
+  ContactRoute: typeof ContactRoute
   FleetRoute: typeof FleetRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
 }
@@ -289,6 +310,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConfigureRoute: ConfigureRouteWithChildren,
+  ContactRoute: ContactRoute,
   FleetRoute: FleetRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,
 }
@@ -305,6 +327,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/Configure",
+        "/Contact",
         "/Fleet",
         "/dashboard"
       ]
@@ -317,6 +340,9 @@ export const routeTree = rootRoute
       "children": [
         "/Configure/Index"
       ]
+    },
+    "/Contact": {
+      "filePath": "Contact.tsx"
     },
     "/Fleet": {
       "filePath": "Fleet.tsx",
