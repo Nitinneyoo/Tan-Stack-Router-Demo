@@ -13,7 +13,7 @@ interface RobotDetail {
 // Header component
 const Header: React.FC = () => {
   return (
-    <header className="bg-gradient-to-r from-teal-600 to-cyan-600 text-white py-16">
+    <header className="bg-primary text-white py-16">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Robotics Fleet</h1>
         <p className="text-lg md:text-xl mb-6">Explore four cutting-edge robots designed for diverse applications</p>
@@ -99,7 +99,7 @@ const Details: React.FC = () => {
 // Call-to-Action section
 const CTA: React.FC = () => {
   return (
-    <section className="py-16 bg-teal-600 text-white">
+    <section className="py-16 bg-primary text-white">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4">Choose Your Robot</h2>
         <p className="text-lg mb-6">Contact us to find the perfect robot for your needs.</p>
@@ -120,7 +120,7 @@ const Robot: React.FC = () => {
   );
 };
 
-export const Route = createFileRoute('/Dashboard/')({
+export const Route = createFileRoute('/dashboard/')({
   component: Robot,
 });
 

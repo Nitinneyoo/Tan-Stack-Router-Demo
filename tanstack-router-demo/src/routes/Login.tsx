@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import type React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,16 +34,6 @@ const signupSchema = z
 type LoginData = z.infer<typeof loginSchema>;
 type SignupData = z.infer<typeof signupSchema>;
 type FormErrors = Partial<Record<keyof SignupData, string>>;
-
-// Animation variants
-const fieldVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.2, ease: "easeOut" },
-  }),
-};
 
 const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -116,8 +106,8 @@ const LoginPage = () => {
           }
         });
         setErrors(newErrors);
-      } else {
-        setAuthError((error as any).message);
+      } else if (error instanceof Error) {
+        setAuthError(error.message);
       }
     }
   };
@@ -144,48 +134,33 @@ const LoginPage = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: FormErrors = {};
+        // biome-ignore lint/complexity/noForEach: <explanation>
         error.errors.forEach((err) => {
           if (err.path[0]) {
             newErrors[err.path[0] as keyof SignupData] = err.message;
           }
         });
         setErrors(newErrors);
-      } else {
-        setAuthError((error as any).message);
+      } else if (error instanceof Error) {
+        setAuthError(error.message);
       }
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50/90 via-white/90 to-blue-100/90 dark:from-blue-900/90 dark:via-gray-900/90 dark:to-blue-950/90 relative overflow-hidden">
-      {/* Particle Background */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute w-1.5 h-1.5 bg-blue-400/50 rounded-full animate-particle top-10 left-20" />
-        <div className="absolute w-2 h-2 bg-blue-500/50 rounded-full animate-particle top-40 right-28 delay-600" />
-        <div className="absolute w-1 h-1 bg-blue-300/50 rounded-full animate-particle bottom-20 left-40 delay-300" />
-        <div className="absolute w-1.5 h-1.5 bg-blue-400/50 rounded-full animate-particle top-60 left-60 delay-900" />
-      </div>
-
+    <div className="min-h-screen flex flex-col bg-white text-black">
       {/* Main Content */}
-      <main className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-md w-full bg-white/95 dark:bg-gray-800/95 p-8 rounded-2xl shadow-2xl border border-blue-200/30 dark:border-blue-800/30 backdrop-blur-lg"
-        >
-          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center">
+      <main className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg">
+          <h2 className="text-3xl font-bold text-black text-center">
             {isSignup
               ? "Sign Up for ANSCER Robotics"
               : "Login to ANSCER Robotics"}
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-300">
+          <p className="mt-2 text-center text-sm text-black">
             {isSignup
               ? "Create your account to join the automation revolution."
               : "Access your account to explore our solutions."}
-            {!isSignup && (
-              <span className="block mt-1 text-xs text-gray-500"></span>
-            )}
           </p>
 
           {/* Form */}
@@ -194,19 +169,11 @@ const LoginPage = () => {
             className="mt-6 space-y-6"
           >
             {/* Email Field */}
-            <motion.div
-              variants={fieldVariants}
-              custom={0}
-              initial="hidden"
-              animate="visible"
-            >
-              <Label
-                htmlFor="email"
-                className="text-gray-800 dark:text-gray-100 font-semibold"
-              >
+            <div>
+              <Label htmlFor="email" className="text-black font-semibold">
                 Email
               </Label>
-              <div className="mt-2 relative group">
+              <div className="mt-2 relative">
                 <Input
                   id="email"
                   name="email"
@@ -215,43 +182,26 @@ const LoginPage = () => {
                   onChange={isSignup ? handleSignupChange : handleLoginChange}
                   placeholder="Your email"
                   className={cn(
-                    "pl-10 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]",
-                    errors.email && "border-red-500 focus:ring-red-500"
+                    "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                    errors.email && "border-red-500"
                   )}
                 />
                 <Mail
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 group-hover:text-blue-400"
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
                   aria-hidden="true"
                 />
               </div>
-              <AnimatePresence>
-                {errors.email && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="mt-2 text-sm text-red-500"
-                  >
-                    {errors.email}
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              {errors.email && (
+                <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+              )}
+            </div>
 
             {/* Password Field */}
-            <motion.div
-              variants={fieldVariants}
-              custom={1}
-              initial="hidden"
-              animate="visible"
-            >
-              <Label
-                htmlFor="password"
-                className="text-gray-800 dark:text-gray-100 font-semibold"
-              >
+            <div>
+              <Label htmlFor="password" className="text-black font-semibold">
                 Password
               </Label>
-              <div className="mt-2 relative group">
+              <div className="mt-2 relative">
                 <Input
                   id="password"
                   name="password"
@@ -260,44 +210,30 @@ const LoginPage = () => {
                   onChange={isSignup ? handleSignupChange : handleLoginChange}
                   placeholder="Your password"
                   className={cn(
-                    "pl-10 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]",
-                    errors.password && "border-red-500 focus:ring-red-500"
+                    "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                    errors.password && "border-red-500"
                   )}
                 />
                 <User
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 group-hover:text-blue-400"
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
                   aria-hidden="true"
                 />
               </div>
-              <AnimatePresence>
-                {errors.password && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="mt-2 text-sm text-red-500"
-                  >
-                    {errors.password}
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              {errors.password && (
+                <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+              )}
+            </div>
 
             {/* Confirm Password (Signup Only) */}
             {isSignup && (
-              <motion.div
-                variants={fieldVariants}
-                custom={2}
-                initial="hidden"
-                animate="visible"
-              >
+              <div>
                 <Label
                   htmlFor="confirmPassword"
-                  className="text-gray-800 dark:text-gray-100 font-semibold"
+                  className="text-black font-semibold"
                 >
                   Confirm Password
                 </Label>
-                <div className="mt-2 relative group">
+                <div className="mt-2 relative">
                   <Input
                     id="confirmPassword"
                     name="confirmPassword"
@@ -306,70 +242,42 @@ const LoginPage = () => {
                     onChange={handleSignupChange}
                     placeholder="Confirm your password"
                     className={cn(
-                      "pl-10 pr-4 py-3 bg-white/80 dark:bg-gray-900/80 text-gray-900 dark:text-white border border-blue-200/50 dark:border-blue-700/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]",
-                      errors.confirmPassword &&
-                        "border-red-500 focus:ring-red-500"
+                      "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                      errors.confirmPassword && "border-red-500"
                     )}
                   />
                   <User
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500 group-hover:text-blue-400"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
                     aria-hidden="true"
                   />
                 </div>
-                <AnimatePresence>
-                  {errors.confirmPassword && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="mt-2 text-sm text-red-500"
-                    >
-                      {errors.confirmPassword}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                {errors.confirmPassword && (
+                  <p className="mt-2 text-sm text-red-500">
+                    {errors.confirmPassword}
+                  </p>
+                )}
+              </div>
             )}
 
             {/* Auth Error */}
-            <AnimatePresence>
-              {authError && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="text-sm text-red-500 text-center"
-                >
-                  {authError}
-                </motion.p>
-              )}
-            </AnimatePresence>
+            {authError && (
+              <p className="text-sm text-red-500 text-center">{authError}</p>
+            )}
 
             {/* Submit Button */}
-            <motion.div
-              variants={fieldVariants}
-              custom={isSignup ? 3 : 2}
-              initial="hidden"
-              animate="visible"
-            >
+            <div>
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.8)] transition-all duration-300"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg"
               >
                 {isSignup ? "Sign Up" : "Login"}
               </Button>
-            </motion.div>
+            </div>
           </form>
 
           {/* Toggle Signup/Login */}
-          <motion.div
-            variants={fieldVariants}
-            custom={isSignup ? 4 : 3}
-            initial="hidden"
-            animate="visible"
-            className="mt-4 text-center"
-          >
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+          <div className="mt-4 text-center">
+            <p className="text-sm text-black">
               {isSignup ? "Already have an account?" : "Don't have an account?"}
               <Button
                 onClick={() => {
@@ -383,13 +291,13 @@ const LoginPage = () => {
                     confirmPassword: "",
                   });
                 }}
-                className="ml-1 text-blue-600 hover:text-blue-500 font-semibold"
+                className="ml-1 text-blue-500 hover:text-blue-600 font-semibold bg-white border-2"
               >
                 {isSignup ? "Login" : "Sign Up"}
               </Button>
             </p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -1,10 +1,10 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 
-const ConfigureLayout = () => {
+const configureLayout = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-white shadow-md p-4 flex items-center justify-between">
+      <header className="bg-white shadow-md p-4 flex items-center justify-between w-64">
         <Link
           to="/configure"
           className="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors"
@@ -32,7 +32,7 @@ const ConfigureLayout = () => {
               </li>
               <li>
                 <Link
-                  to="/Configure/automation"
+                  to="/configure/automation"
                   className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
                   activeProps={{
                     className:
@@ -44,7 +44,7 @@ const ConfigureLayout = () => {
               </li>
                <li>
                 <Link
-                  to="/Configure/map"
+                  to="/configure/map"
                   className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
                   activeProps={{
                     className:
@@ -59,7 +59,7 @@ const ConfigureLayout = () => {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 p-6 bg-gray-50 overflow-auto">
+        <main className="flex-1  bg-gray-50 overflow-auto">
           <div className="max-w-7xl mx-auto">
             <Outlet /> {/* Renders child routes like /configure/... */}
           </div>
@@ -69,6 +69,6 @@ const ConfigureLayout = () => {
   );
 };
 
-export const Route = createFileRoute("/Configure")({
-  component: ConfigureLayout,
+export const Route = createFileRoute("/configure")({
+  component: configureLayout,
 });

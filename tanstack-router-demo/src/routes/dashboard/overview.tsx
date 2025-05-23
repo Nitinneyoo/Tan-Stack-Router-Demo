@@ -12,7 +12,7 @@ interface Feature {
 // Header component
 const Header: React.FC = () => {
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-16">
+    <header className="bg-primary text-white py-16">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">NextGen Robotics</h1>
         <p className="text-lg md:text-xl mb-6">Revolutionizing automation with cutting-edge technology</p>
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
+  
 // Features section
 const Features: React.FC = () => {
   const features: Feature[] = [
@@ -88,7 +88,7 @@ const RobotOverview: React.FC = () => {
   );
 };
 
-export const Route = createFileRoute('/Dashboard/overview')({
+export const Route = createFileRoute('/dashboard/overview')({
   component: RobotOverview,
 });
 

@@ -9,7 +9,7 @@ const DashboardLayout = () => {
       </header> */}
       <div className="flex flex-1 overflow-auto bg-gray-200">
         {/* Sidebar */}
-        <aside className="w-64 bg-white text-gray-800 p-4 flex flex-col">
+        <aside className="w-64 bg-white text-gray-800 p-4 flex flex-col h-full">
           <nav >
             <ul>
               <li>
@@ -26,7 +26,7 @@ const DashboardLayout = () => {
               </li>
               <li>
                 <Link
-                  to="/Dashboard/overview"
+                  to="/dashboard/overview"
                   className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
                   activeProps={{
                     className:
@@ -38,7 +38,7 @@ const DashboardLayout = () => {
               </li>
                <li>
                 <Link
-                  to="/Dashboard/settings"
+                  to="/dashboard/settings"
                   className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
                   activeProps={{
                     className:
@@ -60,7 +60,7 @@ const DashboardLayout = () => {
   );
 }
 
-export const Route = createFileRoute('/Dashboard')({
+export const Route = createFileRoute('/dashboard')({
   component: DashboardLayout,
 });
 export default DashboardLayout;

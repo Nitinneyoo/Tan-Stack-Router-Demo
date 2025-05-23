@@ -137,7 +137,7 @@ const SettingsPage: React.FC = () => {
   );
 };
 
-export const Route = createFileRoute('/Dashboard/settings')({
+export const Route = createFileRoute('/dashboard/settings')({
   component: SettingsPage,
 });
 
