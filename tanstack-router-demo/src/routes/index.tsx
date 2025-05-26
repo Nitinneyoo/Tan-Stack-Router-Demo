@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div  className="min-h-screen bg-gray-100 text-gray-800">
       {/* Hero Section */}
-      <header className="bg-white shadow-md">
+      <header className="bg-text shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <h1 className="text-3xl font-bold text-blue-600">Anscer Robotics</h1>
          
@@ -48,7 +48,7 @@ const HomePage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-blue-600 text-white text-center">
+      <section className="py-16 bg-primary text-white text-center">
         <h2 className="text-3xl font-bold mb-4">Ready to Automate with AnsCer?</h2>
         <p className="text-lg mb-6">Get in touch with us and discover how we can help revolutionize your operations.</p>
         <Link

@@ -4,27 +4,28 @@ const configureLayout = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-white shadow-md p-4 flex items-center justify-between w-64">
+      {/* <header className="bg-white shadow-md p-4 flex items-center justify-between w-64">
         <Link
           to="/configure"
           className="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors"
         >
           configure
         </Link>
-      </header>
+      </header> */}
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-64 bg-white shadow-md p-6 flex flex-col border-r border-gray-200">
+        <aside className="w-64 bg-primary shadow-md p-6 flex flex-col border-r border-gray-200">
           <nav className="space-y-2">
             <ul>
               <li>
                 <Link
                   to="/configure"
-                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  className="block py-2 px-4 rounded-lg text-text hover:text-blue-600 transition-colors mt-4"
+                  activeOptions={{exact:true}}
                   activeProps={{
                     className:
-                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                      "block py-2 px-4 rounded-lg bg-blue-900 text-blue-700 font-semibold border-l-4 border-blue-500",
                   }}
                 >
                   Data
@@ -33,10 +34,10 @@ const configureLayout = () => {
               <li>
                 <Link
                   to="/configure/automation"
-                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
+                   className="block py-2 px-4 rounded-lg text-text hover:text-blue-600 transition-colors mt-4"
                   activeProps={{
                     className:
-                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                      "block py-2 px-4 rounded-lg bg-blue-900 text-blue-700 font-semibold border-l-4 border-blue-500",
                   }}
                 >
                   Automation
@@ -45,10 +46,10 @@ const configureLayout = () => {
                <li>
                 <Link
                   to="/configure/map"
-                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
+                  className="block py-2 px-4 rounded-lg text-text hover:text-blue-600 transition-colors mt-4"
                   activeProps={{
                     className:
-                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                      "block py-2 px-4 rounded-lg bg-blue-900 text-blue-700 font-semibold border-l-4 border-blue-500",
                   }}
                 >
                   Map

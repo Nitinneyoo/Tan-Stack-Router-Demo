@@ -69,7 +69,7 @@ export const Route = createRootRoute({
     // Render navbar and Outlet for logged-in users
     return (
       <div className="min-h-screen text-text">
-        <div className="p-2 flex justify-between gap-4 bg-primary sticky top-0">
+        <div className="p-2 flex justify-between gap-4 bg-primary sticky top-0 z-1">
           <Link to="/" className="text-text font-bold text-2xl">
             ANSCER Robotics
           </Link>

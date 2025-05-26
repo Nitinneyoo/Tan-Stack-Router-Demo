@@ -6,7 +6,7 @@ export const Route = createFileRoute('/Fleet')({
 
 function FleetComponent() {
   return <div>
-   <main className="flex-1 p-4 bg-white text-black">
+   <main className="flex-1  bg-white text-black">
       <Outlet/>
     </main>
   </div>

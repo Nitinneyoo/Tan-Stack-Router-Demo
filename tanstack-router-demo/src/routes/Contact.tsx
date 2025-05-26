@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
 import { cn } from "@/lib/utils";
-import {  useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { Mail, MessageSquare, User } from "lucide-react";
 
@@ -84,17 +84,16 @@ const ContactPage = () => {
   };
 
   // FloatingDock items with navigation
-  
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-black">
       {/* Header */}
-      <header className="bg-white border-b border-gray-300">
+      <header className="bg-primary border-b border-gray-300">
         <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl sm:text-5xl font-bold text-black">
+          <h1 className="text-4xl sm:text-5xl font-bold text-text">
             Connect with ANSCER Robotics
           </h1>
-          <p className="mt-4 text-lg sm:text-xl text-black max-w-3xl">
+          <p className="mt-4 text-lg sm:text-xl text-text max-w-3xl">
             Pioneering the future of automation, we’re here to answer your
             questions and explore how our Hybrid AMRs can transform your
             operations.
@@ -129,7 +128,7 @@ const ContactPage = () => {
                 onChange={handleChange}
                 placeholder="Your name"
                 className={cn(
-                  "pl-12 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg text-base sm:text-lg",
+                  "pl-12 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg text-base sm:text-lg overflow-hidden ",
                   errors.name && "border-red-500"
                 )}
               />
@@ -233,8 +232,69 @@ const ContactPage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-300 py-10">
-        
+      <footer className="py-0">
+        <div className="bg-primary text-white py-10 px-5">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Column 1 - Logo and Socials */}
+            <div>
+              <div className="flex items-center mb-4">
+                <span className="text-3xl font-bold">Anscer Robotics</span>
+              </div>
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold">X</h4>
+                <p>Stay updated with our latest innovations</p>
+              </div>
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold">Discord</h4>
+                <p>Join our community of robotics enthusiasts</p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold">YouTube</h4>
+                <p>Watch tutorials and demos</p>
+              </div>
+            </div>
+
+            {/* Column 2 - Blog and Resources */}
+            <div>
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold">Blog</h4>
+                <p>Insights from our robotics experts</p>
+              </div>
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold">White Paper</h4>
+                <p>Learn about our robotics technology</p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold">Brand Assets</h4>
+                <p>Access our official logos and media</p>
+              </div>
+            </div>
+
+            {/* Column 3 - Forums */}
+            <div>
+              <div>
+                <h4 className="text-lg font-semibold">Forums</h4>
+                <p>Discuss robotics projects and ideas</p>
+              </div>
+              <div className="mt-4">
+                <h4 className="text-lg font-semibold">GitHub</h4>
+                <p>Explore our open-source robotics code</p>
+              </div>
+            </div>
+
+            {/* Column 4 - Webapp and Test Environment */}
+            <div>
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold">Simulation Platform</h4>
+                <p>Test robotics algorithms in our sandbox</p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold">Developer API</h4>
+                <p>Integrate with our robotics systems</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

@@ -2,6 +2,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import AddRobotForm from "./addRobot";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/Fleet/")({
   component: FleetPage,
@@ -30,12 +41,14 @@ function FleetPage() {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <header className="p-2 bg-white border-b flex items-center justify-between text-xl font-bold shadow-lg">
-        <Link to="/Fleet">Fleet</Link>
+      <header className="p-2 bg-primary border-t-1 flex items-center justify-between text-xl font-bold shadow-lg">
+        <Link to="/Fleet" className="text-text">
+          Fleet
+        </Link>
         <div className="text-sm font-normal">
           <Button
             variant="outline"
-            className="bg-blue-900 text-black hover:bg-blue-600! cursor-pointer"
+            className= "text-text hover:bg-blue-600 cursor-pointer"
             onClick={() => setIsModalOpen(true)}
           >
             + Add New Robot In Fleet
@@ -65,12 +78,29 @@ function FleetPage() {
               <div>
                 <strong>Load:</strong> {robot.loadAvailable}
               </div>
-              <Button
-                variant="destructive"
-                onClick={() => handleDeleteRobot(robot.id)} // ✅ correct id used
-              >
-                Delete
-              </Button>
+              <AlertDialog>
+                {/* Wrap the Button with AlertDialogTrigger */}
+                <AlertDialogTrigger asChild>
+                  <Button variant="destructive">Delete</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      the robot with ID {robot.id}.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => handleDeleteRobot(robot.id)}
+                    >
+                      Delete
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           ))
         )}
@@ -82,7 +112,7 @@ function FleetPage() {
           <div className="bg-white p-6 rounded-lg w-[90%] max-w-lg shadow-lg relative border border-gray-200">
             <Button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              className="absolute top-2 right-2 text-text"
             >
               ✕
             </Button>

@@ -9,16 +9,17 @@ const DashboardLayout = () => {
       </header> */}
       <div className="flex flex-1 overflow-auto bg-gray-200">
         {/* Sidebar */}
-        <aside className="w-64 bg-white text-gray-800 p-4 flex flex-col h-full">
+        <aside className="w-64 bg-primary text-text p-4 flex flex-col h-full">
           <nav >
             <ul>
               <li>
                 <Link
                   to="/dashboard"
-                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  className="block py-2 px-4 rounded-lg text-text hover:text-blue-600 transition-colors"
+                  activeOptions={{exact:true}}
                   activeProps={{
                     className:
-                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                      "block py-2 px-4 rounded-lg bg-blue-900 text-blue-700 font-semibold border-l-4 border-blue-500",
                   }}
                 >
                   Robot
@@ -27,10 +28,10 @@ const DashboardLayout = () => {
               <li>
                 <Link
                   to="/dashboard/overview"
-                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
+                   className="block py-2 px-4 rounded-lg text-text hover:text-blue-600 transition-colors mt-4"
                   activeProps={{
                     className:
-                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                      "block py-2 px-4 rounded-lg bg-blue-900 text-blue-700 font-semibold border-l-4 border-blue-500",
                   }}
                 >
                   Overview
@@ -39,10 +40,10 @@ const DashboardLayout = () => {
                <li>
                 <Link
                   to="/dashboard/settings"
-                  className="block py-2 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors mt-5"
+                 className="block py-2 px-4 rounded-lg text-text hover:text-blue-600 transition-colors mt-4"
                   activeProps={{
                     className:
-                      "block py-2 px-4 rounded-lg bg-blue-100 text-blue-700 font-semibold border-l-4 border-blue-500",
+                      "block py-2 px-4 rounded-lg bg-blue-900 text-blue-700 font-semibold border-l-4 border-blue-500",
                   }}
                 >
                   Setting
@@ -52,7 +53,7 @@ const DashboardLayout = () => {
           </nav>
         </aside>
         {/* Main Content Area (Child Outlet) */}
-        <main className="flex-1 p-4 ">
+        <main className="flex-1 border ">
           <Outlet /> {/* Renders child routes like /dashboard/overview */}
         </main>
       </div>

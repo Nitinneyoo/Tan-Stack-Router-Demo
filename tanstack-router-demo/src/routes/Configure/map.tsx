@@ -107,7 +107,7 @@ export const Route = createFileRoute("/configure/map")({
           {/* Navbar */}
           <nav
             className={cn(
-              "fixed md:static top-0 left-0 h-full w-64 bg-white border-r border-gray-300 p-4 z-20",
+              "fixed md:static top-0 left-0 h-full w-64 bg-white border-r border-gray-300 p-4 z-0",
               isNavbarOpen ? "block" : "hidden md:block"
             )}
           >

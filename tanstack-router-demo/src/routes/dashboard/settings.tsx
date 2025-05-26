@@ -20,11 +20,11 @@ interface Setting {
 // Header component
 const Header: React.FC = () => {
   return (
-    <header className="bg-gradient-to-r from-purple-600 to-violet-600 text-white py-16">
+    <header className="bg-primary text-white py-16">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Settings</h1>
         <p className="text-lg md:text-xl mb-6">Customize your robotics experience</p>
-        <Button onClick={() => window.alert('Manage settings clicked!')} className="bg-purple-600 hover:bg-purple-700">
+        <Button onClick={() => window.alert('Manage settings clicked!')} className="bg-blue-600 hover:bg-blue-700">
           Manage Settings
         </Button>
       </div>
@@ -105,7 +105,7 @@ const SettingsSection: React.FC = () => {
             </Card>
           ))}
         </div>
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <Button onClick={handleSave}>Save Settings</Button>
         </div>
       </div>
@@ -116,7 +116,7 @@ const SettingsSection: React.FC = () => {
 // Call-to-Action section
 const CTA: React.FC = () => {
   return (
-    <section className="py-16 bg-purple-600 text-white">
+    <section className="py-16 bg-primary text-text">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4">Optimized for You</h2>
         <p className="text-lg mb-6">Fine-tune your settings to enhance your robotics workflow.</p>
