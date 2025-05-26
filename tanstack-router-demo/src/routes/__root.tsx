@@ -94,6 +94,10 @@ export const Route = createRootRoute({
              hover:underline">
               Contact
             </Link>
+            <Link to="/table" className="[&.active]:font-bold text-text
+             hover:underline">
+              Table
+            </Link>
             <Button
               onClick={handleLogout}
               disabled={!isLoggedIn}

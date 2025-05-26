@@ -391,7 +391,7 @@ export const Route = createFileRoute("/configure/")({
                   <Slider
                     value={[configData.speedLimit]}
                     onValueChange={([value]) => {
-                      console.log("Slider value:", value);
+                      // console.log("Slider value:", value);
                       handleChange("speedLimit", value);
                     }}
                     min={0.5}

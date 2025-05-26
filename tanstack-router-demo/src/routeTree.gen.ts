@@ -16,7 +16,9 @@ import { Route as ConfigureImport } from './routes/configure'
 import { Route as LoginImport } from './routes/Login'
 import { Route as FleetImport } from './routes/Fleet'
 import { Route as ContactImport } from './routes/Contact'
+import { Route as TableRouteImport } from './routes/table/route'
 import { Route as IndexImport } from './routes/index'
+import { Route as TableIndexImport } from './routes/table/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as ConfigureIndexImport } from './routes/configure/index'
 import { Route as FleetIndexImport } from './routes/Fleet/index'
@@ -58,10 +60,22 @@ const ContactRoute = ContactImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const TableRouteRoute = TableRouteImport.update({
+  id: '/table',
+  path: '/table',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const TableIndexRoute = TableIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TableRouteRoute,
 } as any)
 
 const DashboardIndexRoute = DashboardIndexImport.update({
@@ -121,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/table': {
+      id: '/table'
+      path: '/table'
+      fullPath: '/table'
+      preLoaderRoute: typeof TableRouteImport
       parentRoute: typeof rootRoute
     }
     '/Contact': {
@@ -214,10 +235,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof DashboardImport
     }
+    '/table/': {
+      id: '/table/'
+      path: '/'
+      fullPath: '/table/'
+      preLoaderRoute: typeof TableIndexImport
+      parentRoute: typeof TableRouteImport
+    }
   }
 }
 
 // Create and export the route tree
+
+interface TableRouteRouteChildren {
+  TableIndexRoute: typeof TableIndexRoute
+}
+
+const TableRouteRouteChildren: TableRouteRouteChildren = {
+  TableIndexRoute: TableIndexRoute,
+}
+
+const TableRouteRouteWithChildren = TableRouteRoute._addFileChildren(
+  TableRouteRouteChildren,
+)
 
 interface FleetRouteChildren {
   FleetAddRobotRoute: typeof FleetAddRobotRoute
@@ -265,6 +305,7 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/table': typeof TableRouteRouteWithChildren
   '/Contact': typeof ContactRoute
   '/Fleet': typeof FleetRouteWithChildren
   '/Login': typeof LoginRoute
@@ -278,6 +319,7 @@ export interface FileRoutesByFullPath {
   '/Fleet/': typeof FleetIndexRoute
   '/configure/': typeof ConfigureIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/table/': typeof TableIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -292,11 +334,13 @@ export interface FileRoutesByTo {
   '/Fleet': typeof FleetIndexRoute
   '/configure': typeof ConfigureIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/table': typeof TableIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/table': typeof TableRouteRouteWithChildren
   '/Contact': typeof ContactRoute
   '/Fleet': typeof FleetRouteWithChildren
   '/Login': typeof LoginRoute
@@ -310,12 +354,14 @@ export interface FileRoutesById {
   '/Fleet/': typeof FleetIndexRoute
   '/configure/': typeof ConfigureIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/table/': typeof TableIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/table'
     | '/Contact'
     | '/Fleet'
     | '/Login'
@@ -329,6 +375,7 @@ export interface FileRouteTypes {
     | '/Fleet/'
     | '/configure/'
     | '/dashboard/'
+    | '/table/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -342,9 +389,11 @@ export interface FileRouteTypes {
     | '/Fleet'
     | '/configure'
     | '/dashboard'
+    | '/table'
   id:
     | '__root__'
     | '/'
+    | '/table'
     | '/Contact'
     | '/Fleet'
     | '/Login'
@@ -358,11 +407,13 @@ export interface FileRouteTypes {
     | '/Fleet/'
     | '/configure/'
     | '/dashboard/'
+    | '/table/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TableRouteRoute: typeof TableRouteRouteWithChildren
   ContactRoute: typeof ContactRoute
   FleetRoute: typeof FleetRouteWithChildren
   LoginRoute: typeof LoginRoute
@@ -372,6 +423,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TableRouteRoute: TableRouteRouteWithChildren,
   ContactRoute: ContactRoute,
   FleetRoute: FleetRouteWithChildren,
   LoginRoute: LoginRoute,
@@ -390,6 +442,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/table",
         "/Contact",
         "/Fleet",
         "/Login",
@@ -399,6 +452,12 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/table": {
+      "filePath": "table/route.tsx",
+      "children": [
+        "/table/"
+      ]
     },
     "/Contact": {
       "filePath": "Contact.tsx"
@@ -460,6 +519,10 @@ export const routeTree = rootRoute
     "/dashboard/": {
       "filePath": "dashboard/index.tsx",
       "parent": "/dashboard"
+    },
+    "/table/": {
+      "filePath": "table/index.tsx",
+      "parent": "/table"
     }
   }
 }
