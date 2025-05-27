@@ -71,7 +71,7 @@ export const Route = createRootRoute({
       <div className="min-h-screen text-text">
         <div className="p-2 flex justify-between gap-4 bg-primary sticky top-0 z-1">
           <Link to="/" className="text-text font-bold text-2xl">
-            ANSCER Robotics
+            ANSCER Robotics PVT LTD
           </Link>
           <div className="flex gap-4 mr-2 justify-center items-center">
             <Link to="/" className="[&.active]:font-bold text-text
