@@ -127,6 +127,7 @@ const TableData = () => {
                   <option value="Robot Name">Robot Name</option>
                   <option value="Robot ID">Robot ID</option>
                   <option value="ip_address">IP Address</option>
+                  <option value="Path">Path</option>
                 </select>
                 <Input
                   type="text"
