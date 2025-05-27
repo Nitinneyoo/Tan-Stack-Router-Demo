@@ -22,6 +22,7 @@ import { Route as TableIndexImport } from './routes/table/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as ConfigureIndexImport } from './routes/configure/index'
 import { Route as FleetIndexImport } from './routes/Fleet/index'
+import { Route as TableComponentsImport } from './routes/table/components'
 import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
 import { Route as DashboardOverviewImport } from './routes/dashboard/overview'
 import { Route as ConfigureMapImport } from './routes/configure/map'
@@ -94,6 +95,12 @@ const FleetIndexRoute = FleetIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => FleetRoute,
+} as any)
+
+const TableComponentsRoute = TableComponentsImport.update({
+  id: '/components',
+  path: '/components',
+  getParentRoute: () => TableRouteRoute,
 } as any)
 
 const DashboardSettingsRoute = DashboardSettingsImport.update({
@@ -214,6 +221,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSettingsImport
       parentRoute: typeof DashboardImport
     }
+    '/table/components': {
+      id: '/table/components'
+      path: '/components'
+      fullPath: '/table/components'
+      preLoaderRoute: typeof TableComponentsImport
+      parentRoute: typeof TableRouteImport
+    }
     '/Fleet/': {
       id: '/Fleet/'
       path: '/'
@@ -248,10 +262,12 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface TableRouteRouteChildren {
+  TableComponentsRoute: typeof TableComponentsRoute
   TableIndexRoute: typeof TableIndexRoute
 }
 
 const TableRouteRouteChildren: TableRouteRouteChildren = {
+  TableComponentsRoute: TableComponentsRoute,
   TableIndexRoute: TableIndexRoute,
 }
 
@@ -316,6 +332,7 @@ export interface FileRoutesByFullPath {
   '/configure/map': typeof ConfigureMapRoute
   '/dashboard/overview': typeof DashboardOverviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/table/components': typeof TableComponentsRoute
   '/Fleet/': typeof FleetIndexRoute
   '/configure/': typeof ConfigureIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -331,6 +348,7 @@ export interface FileRoutesByTo {
   '/configure/map': typeof ConfigureMapRoute
   '/dashboard/overview': typeof DashboardOverviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/table/components': typeof TableComponentsRoute
   '/Fleet': typeof FleetIndexRoute
   '/configure': typeof ConfigureIndexRoute
   '/dashboard': typeof DashboardIndexRoute
@@ -351,6 +369,7 @@ export interface FileRoutesById {
   '/configure/map': typeof ConfigureMapRoute
   '/dashboard/overview': typeof DashboardOverviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
+  '/table/components': typeof TableComponentsRoute
   '/Fleet/': typeof FleetIndexRoute
   '/configure/': typeof ConfigureIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -372,6 +391,7 @@ export interface FileRouteTypes {
     | '/configure/map'
     | '/dashboard/overview'
     | '/dashboard/settings'
+    | '/table/components'
     | '/Fleet/'
     | '/configure/'
     | '/dashboard/'
@@ -386,6 +406,7 @@ export interface FileRouteTypes {
     | '/configure/map'
     | '/dashboard/overview'
     | '/dashboard/settings'
+    | '/table/components'
     | '/Fleet'
     | '/configure'
     | '/dashboard'
@@ -404,6 +425,7 @@ export interface FileRouteTypes {
     | '/configure/map'
     | '/dashboard/overview'
     | '/dashboard/settings'
+    | '/table/components'
     | '/Fleet/'
     | '/configure/'
     | '/dashboard/'
@@ -456,6 +478,7 @@ export const routeTree = rootRoute
     "/table": {
       "filePath": "table/route.tsx",
       "children": [
+        "/table/components",
         "/table/"
       ]
     },
@@ -507,6 +530,10 @@ export const routeTree = rootRoute
     "/dashboard/settings": {
       "filePath": "dashboard/settings.tsx",
       "parent": "/dashboard"
+    },
+    "/table/components": {
+      "filePath": "table/components.tsx",
+      "parent": "/table"
     },
     "/Fleet/": {
       "filePath": "Fleet/index.tsx",

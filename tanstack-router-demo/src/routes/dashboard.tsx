@@ -9,7 +9,7 @@ const DashboardLayout = () => {
       </header> */}
       <div className="flex flex-1 overflow-auto bg-gray-200">
         {/* Sidebar */}
-        <aside className="w-64 bg-primary text-text p-4 flex flex-col h-full">
+        <aside className="w-48 bg-primary text-text p-4 flex flex-col h-full justify-center items-center">
           <nav >
             <ul>
               <li>

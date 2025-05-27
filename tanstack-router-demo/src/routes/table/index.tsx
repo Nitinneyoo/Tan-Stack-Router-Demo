@@ -92,7 +92,7 @@ const TableData = () => {
     setIsPopoverOpen(false)
   }
 
-  const handleColumnToggle = (column: string) => {
+  const handleColumnToggle = (column: keyof typeof visibleColumns) => {
     setVisibleColumns(prev => ({
       ...prev,
       [column]: !prev[column]
@@ -101,7 +101,7 @@ const TableData = () => {
 
   return (
     <div>
-      <header className="p-2 bg-gray-200 flex items-center justify-between text-xl font-bold shadow-lg">
+      <header className="p-2 bg-gray-200 flex items-center justify-between text-xl font-bold shadow-lg top-0 sticky z-1">
         <Link to="/Fleet" className="text-gray-900">
           Fleet
         </Link>

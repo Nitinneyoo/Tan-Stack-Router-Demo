@@ -120,7 +120,7 @@ const Details: React.FC = () => {
 // Call-to-Action section
 const CTA: React.FC = () => {
   return (
-    <section className="py-16 bg-primary text-white">
+    <section className="py-16 bg-white text-gray-900">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4">Choose Your Robot</h2>
         <p className="text-lg mb-6">
