@@ -6,6 +6,8 @@ import { Table, TableBody, TableCaption, TableFooter, TableHead, TableHeader, Ta
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Input } from '@/components/ui/input'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 
 interface DataItem {
   id: number;
@@ -20,6 +22,13 @@ const TableData = () => {
   const [filterType, setFilterType] = useState('')
   const [filterValue, setFilterValue] = useState('')
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+  const [visibleColumns, setVisibleColumns] = useState({
+    id: true,
+    'Robot Name': true,
+    'Robot ID': true,
+    ip_address: true,
+    Path: true
+  })
 
   const data = useMemo(() => {
     if (!filterType || !filterValue) return mData
@@ -33,27 +42,32 @@ const TableData = () => {
       { 
         header: 'ID',
         accessorKey: 'id',
-        footer: 'ID'
+        footer: 'ID',
+        enableHiding: true
       },
       {
         header: 'RobotName',
         accessorKey: 'Robot Name',
         footer: 'RobotName',
+        enableHiding: true
       },
       {
         header: 'RobotID',
         accessorKey: 'Robot ID',
         footer: 'RobotID',
+        enableHiding: true
       },
       {
         header: 'IP_Address',
         accessorKey: 'ip_address',
         footer: 'IP_Address',
+        enableHiding: true
       },
       {
         header: 'PATH',
         accessorKey: 'Path',
         footer: 'PATH',
+        enableHiding: true
       },
     ],
     []
@@ -63,10 +77,26 @@ const TableData = () => {
     data, 
     columns,
     getCoreRowModel: getCoreRowModel(),
+    state: {
+      columnVisibility: {
+        id: visibleColumns.id,
+        'Robot Name': visibleColumns['Robot Name'],
+        'Robot ID': visibleColumns['Robot ID'],
+        ip_address: visibleColumns.ip_address,
+        Path: visibleColumns.Path
+      }
+    }
   })
 
   const handleFilterApply = () => {
     setIsPopoverOpen(false)
+  }
+
+  const handleColumnToggle = (column: string) => {
+    setVisibleColumns(prev => ({
+      ...prev,
+      [column]: !prev[column]
+    }))
   }
 
   return (
@@ -104,6 +134,17 @@ const TableData = () => {
                   onChange={(e) => setFilterValue(e.target.value)}
                   placeholder="Enter filter value"
                 />
+                <h3 className="font-medium">Show Columns</h3>
+                {columns.map(column => (
+                  <div key={column.accessorKey} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={column.accessorKey as string}
+                      checked={visibleColumns[column.accessorKey as keyof typeof visibleColumns]}
+                      onCheckedChange={() => handleColumnToggle(column.accessorKey as keyof typeof visibleColumns)}
+                    />
+                    <Label htmlFor={column.accessorKey as string}>{column.header}</Label>
+                  </div>
+                ))}
                 <Button onClick={handleFilterApply}>Apply</Button>
               </div>
             </PopoverContent>
