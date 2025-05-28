@@ -17,7 +17,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3002,
+    port: 8000,
     open: true,
     hmr:true,
     host:true
