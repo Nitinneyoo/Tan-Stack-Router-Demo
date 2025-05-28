@@ -1,54 +1,70 @@
-# React + TypeScript + Vite
+# Anscer Robotics Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive React-based dashboard for managing and monitoring robotic automation systems.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Fleet Management**: Add, monitor, and manage robots in your fleet
+- **Configuration Panel**: Configure robot settings including:
+  - Operation modes
+  - Safety protocols
+  - Energy optimization
+  - Task scheduling
+- **Workspace Mapping**: Visual editor for configuring workspace layouts
+- **Authentication**: Secure login and signup system
+- **Real-time Monitoring**: Track robot status and activities
+- **Task Management**: Prioritize and schedule robot tasks
+- **Contact System**: Built-in communication system
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 
+- TypeScript
+- TanStack Router
+- Tailwind CSS
+- Radix UI Components
+- DND Kit for drag-and-drop
+- Zod for validation
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+```sh
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+3. Start the development server:
+```sh
+npm run dev
 ```
+
+The application will be available at `http://localhost:8000`
+
+## Project Structure
+
+```
+src/
+├── components/      # Reusable UI components
+├── routes/         # Application routes and pages
+│   ├── Configure/  # Configuration related routes
+│   ├── Fleet/      # Fleet management routes
+│   └── dashboard/  # Dashboard routes
+├── lib/           # Utility functions
+└── hooks/         # Custom React hooks
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## License
+
+[Your License]
+
+## Contributing
+
+[Contribution Guidelines]
