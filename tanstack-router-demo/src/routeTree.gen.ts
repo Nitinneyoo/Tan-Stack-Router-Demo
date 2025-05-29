@@ -25,6 +25,7 @@ import { Route as FleetIndexImport } from './routes/Fleet/index'
 import { Route as TableComponentsImport } from './routes/table/components'
 import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
 import { Route as DashboardOverviewImport } from './routes/dashboard/overview'
+import { Route as DashboardAddRobotImport } from './routes/dashboard/addRobot'
 import { Route as ConfigureMapImport } from './routes/configure/map'
 import { Route as ConfigureAutomationImport } from './routes/configure/automation'
 import { Route as FleetAddRobotImport } from './routes/Fleet/addRobot'
@@ -112,6 +113,12 @@ const DashboardSettingsRoute = DashboardSettingsImport.update({
 const DashboardOverviewRoute = DashboardOverviewImport.update({
   id: '/overview',
   path: '/overview',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardAddRobotRoute = DashboardAddRobotImport.update({
+  id: '/addRobot',
+  path: '/addRobot',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -206,6 +213,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/configure/map'
       preLoaderRoute: typeof ConfigureMapImport
       parentRoute: typeof ConfigureImport
+    }
+    '/dashboard/addRobot': {
+      id: '/dashboard/addRobot'
+      path: '/addRobot'
+      fullPath: '/dashboard/addRobot'
+      preLoaderRoute: typeof DashboardAddRobotImport
+      parentRoute: typeof DashboardImport
     }
     '/dashboard/overview': {
       id: '/dashboard/overview'
@@ -304,12 +318,14 @@ const ConfigureRouteWithChildren = ConfigureRoute._addFileChildren(
 )
 
 interface DashboardRouteChildren {
+  DashboardAddRobotRoute: typeof DashboardAddRobotRoute
   DashboardOverviewRoute: typeof DashboardOverviewRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAddRobotRoute: DashboardAddRobotRoute,
   DashboardOverviewRoute: DashboardOverviewRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
@@ -330,6 +346,7 @@ export interface FileRoutesByFullPath {
   '/Fleet/addRobot': typeof FleetAddRobotRoute
   '/configure/automation': typeof ConfigureAutomationRoute
   '/configure/map': typeof ConfigureMapRoute
+  '/dashboard/addRobot': typeof DashboardAddRobotRoute
   '/dashboard/overview': typeof DashboardOverviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/table/components': typeof TableComponentsRoute
@@ -346,6 +363,7 @@ export interface FileRoutesByTo {
   '/Fleet/addRobot': typeof FleetAddRobotRoute
   '/configure/automation': typeof ConfigureAutomationRoute
   '/configure/map': typeof ConfigureMapRoute
+  '/dashboard/addRobot': typeof DashboardAddRobotRoute
   '/dashboard/overview': typeof DashboardOverviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/table/components': typeof TableComponentsRoute
@@ -367,6 +385,7 @@ export interface FileRoutesById {
   '/Fleet/addRobot': typeof FleetAddRobotRoute
   '/configure/automation': typeof ConfigureAutomationRoute
   '/configure/map': typeof ConfigureMapRoute
+  '/dashboard/addRobot': typeof DashboardAddRobotRoute
   '/dashboard/overview': typeof DashboardOverviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/table/components': typeof TableComponentsRoute
@@ -389,6 +408,7 @@ export interface FileRouteTypes {
     | '/Fleet/addRobot'
     | '/configure/automation'
     | '/configure/map'
+    | '/dashboard/addRobot'
     | '/dashboard/overview'
     | '/dashboard/settings'
     | '/table/components'
@@ -404,6 +424,7 @@ export interface FileRouteTypes {
     | '/Fleet/addRobot'
     | '/configure/automation'
     | '/configure/map'
+    | '/dashboard/addRobot'
     | '/dashboard/overview'
     | '/dashboard/settings'
     | '/table/components'
@@ -423,6 +444,7 @@ export interface FileRouteTypes {
     | '/Fleet/addRobot'
     | '/configure/automation'
     | '/configure/map'
+    | '/dashboard/addRobot'
     | '/dashboard/overview'
     | '/dashboard/settings'
     | '/table/components'
@@ -506,6 +528,7 @@ export const routeTree = rootRoute
     "/dashboard": {
       "filePath": "dashboard.tsx",
       "children": [
+        "/dashboard/addRobot",
         "/dashboard/overview",
         "/dashboard/settings",
         "/dashboard/"
@@ -522,6 +545,10 @@ export const routeTree = rootRoute
     "/configure/map": {
       "filePath": "configure/map.tsx",
       "parent": "/configure"
+    },
+    "/dashboard/addRobot": {
+      "filePath": "dashboard/addRobot.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/overview": {
       "filePath": "dashboard/overview.tsx",

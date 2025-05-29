@@ -6,12 +6,12 @@ const DashboardLayout = () => {
       {/* Fixed Header */}
       <div className="h-screen flex flex-col fixed w-full">
         {/* Fixed Header */}
-        <div className="flex justify-between items-center px-6 py-4 border-b bg-gray-200">
+        {/* <div className="flex justify-between items-center px-6 py-4 border-b bg-gray-200">
           <h2 className="text-2xl font-bold text-gray-900">Dashboard</h2>
-        </div>
+        </div> */}
 
         {/* Main Content Area */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden">  
           <div className="h-full flex">
             {/* Fixed Sidebar */}
             <aside className="w-64 bg-gray-200 border-r">
