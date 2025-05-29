@@ -190,8 +190,8 @@ export const Route = createFileRoute("/configure/")({
 
     return (
       <div className="min-h-screen bg-white text-black p-0">
-        <main className=" mx-4 w-full !p-0">
-          <div className="bg-white p-8 border border-gray-300 rounded-lg">
+        <main className=" w-full h-full">
+          <div className="bg-white p-8 border border-gray-300">
             <form onSubmit={handleSave} className="space-y-8">
               {/* Operation Mode */}
               <div>

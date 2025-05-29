@@ -1,24 +1,4 @@
-import { Button } from "@/components/ui/button";
-// import { Calendar } from "@/components/ui/calendar";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { DateRangePicker } from "../../components/ui/date-range-picker";
-import { useState } from "react";
-import { MoreVertical } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createFileRoute } from "@tanstack/react-router";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -26,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-// import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -35,61 +15,89 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
+// import ReactPaginate from "react-paginate";
+import { createFileRoute } from "@tanstack/react-router";
 
-interface Robot {
-  serialNumber: string;
-  type: string;
-  location: string;
-  charge: number;
-  status: "active" | "inactive" | "error";
-  connectivity: "online" | "offline";
-}
-
-const Dashboard = () => {
-  const [robots, setRobots] = useState<Robot[]>([
-    {
-      serialNumber: "ROB001",
-      type: "Delivery",
-      location: "Warehouse A",
-      charge: 85,
-      status: "active",
-      connectivity: "online",
-    },
-    // Add more initial robots as needed
-  ]);
-
-  const stats = {
-    active: robots.filter((r) => r.status === "active").length,
-    inactive: robots.filter((r) => r.status === "inactive").length,
-    error: robots.filter((r) => r.status === "error").length,
-    total: robots.length,
-  };
-
-
-  const deleteRobot = (serialNumber: string) => {
-    setRobots(robots.filter((robot) => robot.serialNumber !== serialNumber));
-  };
-
-  const [open, setOpen] = useState(false);
-  const [newRobot, setNewRobot] = useState({
+// Sample data (replace with API fetch in a real application)
+const sampleRobots = [
+  {
+    serialNumber: "TR100250",
     type: "Delivery",
     location: "Warehouse A",
-  });
+    charge: 50,
+    status: "ACTIVE",
+    connectivity: "Connected",
+  },
+  {
+    serialNumber: "TR100251",
+    type: "Maintenance",
+    location: "Warehouse B",
+    charge: 25,
+    status: "INACTIVE",
+    connectivity: "Connected",
+  },
+  {
+    serialNumber: "TR100252",
+    type: "Security",
+    location: "Production",
+    charge: 75,
+    status: "ACTIVE",
+    connectivity: "Disconnected",
+  },
+  // Add more sample data as needed
+];
+
+const RobotHome = () => {
+  const [open, setOpen] = useState(false);
+  const [newRobot, setNewRobot] = useState({ type: "", location: "" });
+  const [allRobots, setAllRobots] = useState(sampleRobots);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedType, setSelectedType] = useState("All");
+  const [selectedLocation, setSelectedLocation] = useState("All");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage] = useState(10);
 
   const handleAddRobot = () => {
-    const robot: Robot = {
-      serialNumber: `ROB${(robots.length + 1).toString().padStart(3, "0")}`,
-      type: newRobot.type,
-      location: newRobot.location,
-      charge: 100,
-      status: "inactive",
-      connectivity: "offline",
-    };
-    setRobots([...robots, robot]);
+    console.log("Adding new robot:", newRobot);
+    setNewRobot({ type: "", location: "" });
     setOpen(false);
-    // Reset form
-    setNewRobot({ type: "Delivery", location: "Warehouse A" });
   };
+
+  // Compute filtered robots
+  const filteredRobots = allRobots.filter((robot) => {
+    const matchesSearch =
+      searchTerm === "" ||
+      robot.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      robot.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      robot.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      robot.status.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesType = selectedType === "All" || robot.type === selectedType;
+    const matchesLocation =
+      selectedLocation === "All" || robot.location === selectedLocation;
+    const matchesStatus =
+      selectedStatus === "All" || robot.status === selectedStatus;
+    return matchesSearch && matchesType && matchesLocation && matchesStatus;
+  });
+
+  // Compute pagination
+  const totalPages = Math.ceil(filteredRobots.length / rowsPerPage);
+  const indexOfLastRobot = currentPage * rowsPerPage;
+  const indexOfFirstRobot = indexOfLastRobot - rowsPerPage;
+  const displayedRobots = filteredRobots.slice(
+    indexOfFirstRobot,
+    indexOfLastRobot
+  );
+
+  // Reset current page when filters change
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedType, selectedLocation, selectedStatus]);
+
+  // Handle page change
+  
 
   return (
     <div className="container mx-auto p-6">
@@ -155,129 +163,138 @@ const Dashboard = () => {
         </Dialog>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
-        <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-gray-900">Total Robots</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-gray-900">Active</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold text-gray-900">{stats.active}</p>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-gray-900">Inactive</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold text-gray-900">{stats.inactive}</p>
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-gray-900">Error</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold text-gray-900">{stats.error}</p>
-          </CardContent>
-        </Card>
+      {/* Search and Filters */}
+      <div className="mb-4 flex items-center space-x-4">
+        <input
+          type="text"
+          placeholder="Search robots"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border p-2 flex-grow rounded-md text-gray-900!"
+        />
+        <Select value={selectedType} onValueChange={setSelectedType}>
+          <SelectTrigger className="w-40 text-gray-900">
+            <SelectValue placeholder="Type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="All">All</SelectItem>
+            <SelectItem value="Delivery">Delivery</SelectItem>
+            <SelectItem value="Maintenance">Maintenance</SelectItem>
+            <SelectItem value="Security">Security</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+          <SelectTrigger className="w-40 text-gray-900">
+            <SelectValue placeholder="Location" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="All">All</SelectItem>
+            <SelectItem value="Warehouse A">Warehouse A</SelectItem>
+            <SelectItem value="Warehouse B">Warehouse B</SelectItem>
+            <SelectItem value="Production">Production</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+          <SelectTrigger className="w-40 text-gray-900">
+            <SelectValue placeholder="Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="All">All</SelectItem>
+            <SelectItem value="ACTIVE">ACTIVE</SelectItem>
+            <SelectItem value="INACTIVE">INACTIVE</SelectItem>
+            <SelectItem value="ERROR">ERROR</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-gray-900 font-semibold">
+      {/* Robot Table */}
+      <div className="mb-4">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Serial Number
-              </TableHead>
-              <TableHead className="text-gray-900 font-semibold">
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Type
-              </TableHead>
-              <TableHead className="text-gray-900 font-semibold">
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Location
-              </TableHead>
-              <TableHead className="text-gray-900 font-semibold">
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Charge
-              </TableHead>
-              <TableHead className="text-gray-900 font-semibold">
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
-              </TableHead>
-              <TableHead className="text-gray-900 font-semibold">
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Connectivity
-              </TableHead>
-              <TableHead className="text-gray-900 font-semibold">
-                Actions
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {robots.map((robot) => (
-              <TableRow key={robot.serialNumber} className="hover:bg-gray-50">
-                <TableCell className="text-gray-900">
-                  {robot.serialNumber}
-                </TableCell>
-                <TableCell className="text-gray-900">{robot.type}</TableCell>
-                <TableCell className="text-gray-900">
-                  {robot.location}
-                </TableCell>
-                <TableCell className="text-gray-900">{robot.charge}%</TableCell>
-                <TableCell>
-                  <span
-                    className={`px-2 py-1 rounded-full text-sm ${
-                      robot.status === "active"
-                        ? "bg-green-100 text-gray-900"
-                        : robot.status === "inactive"
-                          ? "bg-gray-100 text-gray-900"
-                          : "bg-red-100 text-gray-900"
-                    }`}
-                  >
-                    {robot.status}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <span
-                    className={`px-2 py-1 rounded-full text-sm ${
-                      robot.connectivity === "online"
-                        ? "bg-green-100 text-gray-900"
-                        : "bg-gray-100 text-gray-900"
-                    }`}
-                  >
-                    {robot.connectivity}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger className="hover:bg-gray-100 p-1 rounded">
-                      <MoreVertical className="h-5 w-5 text-gray-900" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem
-                        className="text-gray-900 cursor-pointer hover:bg-gray-100"
-                        onClick={() => deleteRobot(robot.serialNumber)}
-                      >
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {displayedRobots.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
+                  No robots found
+                </td>
+              </tr>
+            ) : (
+              displayedRobots.map((robot) => (
+                <tr key={robot.serialNumber}>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 text-sm">
+                    {robot.serialNumber}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 text-sm">{robot.type}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 text-sm">
+                    {robot.location}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5">
+                      <div
+                        className="bg-blue-600 h-2.5 rounded-full text-sm"
+                        style={{ width: `${robot.charge}%` }}
+                      />
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-serif">
+                    <span
+                      className={
+                        robot.status === "ACTIVE"
+                          ? "text-green-500"
+                          : robot.status === "INACTIVE"
+                            ? "text-orange-500"
+                            : "text-red-500"
+                      }
+                    >
+                      {robot.status}  
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <span
+                      className={
+                        robot.connectivity === "Connected"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }
+                    >
+                      {robot.connectivity}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
+
+      {/* Pagination */}
+     
     </div>
   );
-};
-
-export const Route = createFileRoute("/dashboard/")({
-  component: Dashboard,
+}
+export const Route = createFileRoute('/dashboard/')({
+  component: RobotHome,
 });
 
-export default Dashboard;
+export default RobotHome ;
