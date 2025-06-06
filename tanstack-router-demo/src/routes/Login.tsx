@@ -146,13 +146,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-black">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <main className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full bg-background p-8 border border-gray-300 rounded-lg">
-          <h2 className="text-3xl font-bold text-black text-center">
+          <h2 className="text-3xl font-bold text-foreground text-center">
             ANSCER Robotics
           </h2>
-          <p className="mt-2 text-center text-sm text-black">
+          <p className="mt-2 text-center text-sm text-foreground">
             Access your account or join the automation revolution.
           </p>
           <Tabs defaultValue="login" className="mt-6">
@@ -163,7 +163,7 @@ const LoginPage = () => {
             <TabsContent value="login">
               <form onSubmit={handleLogin} className="mt-6 space-y-6">
                 <div>
-                  <Label htmlFor="login-email" className="text-black font-semibold">
+                  <Label htmlFor="login-email" className="text-foreground font-semibold">
                     Email
                   </Label>
                   <div className="mt-2 relative">
@@ -175,12 +175,12 @@ const LoginPage = () => {
                       onChange={handleLoginChange}
                       placeholder="Your email"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.email && "border-red-500"
                       )}
                     />
                     <Mail
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                       aria-hidden="true"
                     />
                   </div>
@@ -189,7 +189,7 @@ const LoginPage = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="login-password" className="text-black font-semibold">
+                  <Label htmlFor="login-password" className="text-foreground font-semibold">
                     Password
                   </Label>
                   <div className="mt-2 relative">
@@ -201,12 +201,12 @@ const LoginPage = () => {
                       onChange={handleLoginChange}
                       placeholder="Your password"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.password && "border-red-500"
                       )}
                     />
                     <User
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                       aria-hidden="true"
                     />
                   </div>
@@ -220,7 +220,7 @@ const LoginPage = () => {
                 <div>
                   <Button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-foreground py-3 rounded-lg"
+                    className="w-full bg-background-500 hover:bg-background-600 text-foreground py-3 rounded-lg"
                   >
                     Login
                   </Button>
@@ -230,7 +230,7 @@ const LoginPage = () => {
             <TabsContent value="signup">
               <form onSubmit={handleSignup} className="mt-6 space-y-6">
                 <div>
-                  <Label htmlFor="signup-email" className="text-black font-semibold">
+                  <Label htmlFor="signup-email" className="text-foreground font-semibold">
                     Email
                   </Label>
                   <div className="mt-2 relative">
@@ -242,12 +242,12 @@ const LoginPage = () => {
                       onChange={handleSignupChange}
                       placeholder="Your email"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.email && "border-red-500"
                       )}
                     />
                     <Mail
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                       aria-hidden="true"
                     />
                   </div>
@@ -256,7 +256,7 @@ const LoginPage = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="signup-password" className="text-black font-semibold">
+                  <Label htmlFor="signup-password" className="text-foreground font-semibold">
                     Password
                   </Label>
                   <div className="mt-2 relative">
@@ -268,12 +268,12 @@ const LoginPage = () => {
                       onChange={handleSignupChange}
                       placeholder="Your password"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.password && "border-red-500"
                       )}
                     />
                     <User
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                       aria-hidden="true"
                     />
                   </div>
@@ -282,7 +282,7 @@ const LoginPage = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="confirmPassword" className="text-black font-semibold">
+                  <Label htmlFor="confirmPassword" className="text-foreground font-semibold">
                     Confirm Password
                   </Label>
                   <div className="mt-2 relative">
@@ -294,12 +294,12 @@ const LoginPage = () => {
                       onChange={handleSignupChange}
                       placeholder="Confirm your password"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.confirmPassword && "border-red-500"
                       )}
                     />
                     <User
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                       aria-hidden="true"
                     />
                   </div>
@@ -315,7 +315,7 @@ const LoginPage = () => {
                 <div>
                   <Button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-foreground py-3 rounded-lg"
+                    className="w-full bg-background-500 hover:bg-background-600 text-foreground py-3 rounded-lg"
                   >
                     Sign Up
                   </Button>

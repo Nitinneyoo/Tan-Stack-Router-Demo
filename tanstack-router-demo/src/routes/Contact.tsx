@@ -86,7 +86,7 @@ const ContactPage = () => {
   // FloatingDock items with navigation
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-black">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       {/* Header */}
       <header className="bg-primary border-b border-gray-300">
         <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
@@ -104,7 +104,7 @@ const ContactPage = () => {
       {/* Main Content */}
       <main className="flex-grow max-w-4xl mx-auto w-full py-12 px-4 sm:px-6 lg:px-8">
         <div className="mb-8 text-center">
-          <p className="text-black text-lg">
+          <p className="text-foreground text-lg">
             At ANSCER Robotics, we’re revolutionizing industries with
             intelligent automation. Reach out to discuss partnerships,
             solutions, or inquiries.
@@ -116,7 +116,7 @@ const ContactPage = () => {
         >
           {/* Name Field */}
           <div>
-            <Label htmlFor="name" className="text-black font-semibold text-lg">
+            <Label htmlFor="name" className="text-foreground font-semibold text-lg">
               Name
             </Label>
             <div className="mt-2 relative">
@@ -128,12 +128,12 @@ const ContactPage = () => {
                 onChange={handleChange}
                 placeholder="Your name"
                 className={cn(
-                  "pl-12 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg text-base sm:text-lg overflow-hidden ",
+                  "pl-12 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg text-base sm:text-lg overflow-hidden ",
                   errors.name && "border-red-500"
                 )}
               />
               <User
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                 aria-hidden="true"
               />
             </div>
@@ -146,7 +146,7 @@ const ContactPage = () => {
 
           {/* Email Field */}
           <div>
-            <Label htmlFor="email" className="text-black font-semibold text-lg">
+            <Label htmlFor="email" className="text-foreground font-semibold text-lg">
               Email
             </Label>
             <div className="mt-2 relative">
@@ -158,12 +158,12 @@ const ContactPage = () => {
                 onChange={handleChange}
                 placeholder="Your email"
                 className={cn(
-                  "pl-12 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg text-base sm:text-lg",
+                  "pl-12 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg text-base sm:text-lg",
                   errors.email && "border-red-500"
                 )}
               />
               <Mail
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                 aria-hidden="true"
               />
             </div>
@@ -178,7 +178,7 @@ const ContactPage = () => {
           <div>
             <Label
               htmlFor="message"
-              className="text-black font-semibold text-lg"
+              className="text-foreground font-semibold text-lg"
             >
               Message
             </Label>
@@ -191,12 +191,12 @@ const ContactPage = () => {
                 placeholder="Tell us about your needs or inquiries"
                 rows={5}
                 className={cn(
-                  "pl-12 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg text-base sm:text-lg",
+                  "pl-12 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg text-base sm:text-lg",
                   errors.message && "border-red-500"
                 )}
               />
               <MessageSquare
-                className="absolute left-4 top-3 h-5 w-5 text-gray-500"
+                className="absolute left-4 top-3 h-5 w-5 text-foreground"
                 aria-hidden="true"
               />
             </div>
@@ -223,7 +223,7 @@ const ContactPage = () => {
           <div>
             <Button
               type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-foreground py-3 sm:py-4 rounded-lg font-semibold text-lg"
+              className="w-full bg-background-500 hover:bg-background-600 text-foreground py-3 sm:py-4 rounded-lg font-semibold text-lg"
             >
               Send Message
             </Button>

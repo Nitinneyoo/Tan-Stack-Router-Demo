@@ -27,10 +27,10 @@ const MapCell = ({
 }) => {
   const bgColor =
     type === "workstation"
-      ? "bg-blue-500"
+      ? "bg-background-500"
       : type === "obstacle"
         ? "bg-red-500"
-        : "bg-gray-200";
+        : "text-foreground-200";
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <div
@@ -101,7 +101,7 @@ export const Route = createFileRoute("/Configure/map")({
     ];
 
     return (
-      <div className="min-h-screen bg-background text-black">
+      <div className="min-h-screen bg-background text-foreground">
         {/* Main Layout */}
         <div className="flex min-h-[calc(100vh-4rem)]">
           {/* Navbar */}
@@ -112,10 +112,10 @@ export const Route = createFileRoute("/Configure/map")({
             )}
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-black">Configuration</h2>
+              <h2 className="text-xl font-bold text-foreground">Configuration</h2>
               <Button
                 variant="ghost"
-                className="md:hidden text-black hover:bg-gray-200"
+                className="md:hidden text-foreground hover:text-foreground-200"
                 onClick={() => setIsNavbarOpen(false)}
               >
                 <X className="h-6 w-6" />
@@ -133,8 +133,8 @@ export const Route = createFileRoute("/Configure/map")({
                     className={cn(
                       "w-full justify-start text-sm font-bold",
                       window.location.pathname === option.path
-                        ? "bg-blue-500 text-foreground"
-                        : "bg-background text-black border-gray-300 hover:bg-gray-200"
+                        ? "bg-background-500 text-foreground"
+                        : "bg-background text-foreground border-gray-300 hover:text-foreground-200"
                     )}
                     onClick={() => setIsNavbarOpen(false)}
                   >
@@ -150,7 +150,7 @@ export const Route = createFileRoute("/Configure/map")({
           <div className="flex-1 p-6">
             <Button
               variant="ghost"
-              className="md:hidden mb-4 text-black hover:bg-gray-200"
+              className="md:hidden mb-4 text-foreground hover:text-foreground-200"
               onClick={() => setIsNavbarOpen(true)}
             >
               <Menu className="h-6 w-6" />
@@ -159,12 +159,12 @@ export const Route = createFileRoute("/Configure/map")({
               {/* Map Header */}
               <div className="bg-background p-6 border border-gray-300 rounded-lg">
                 <div className="flex items-center mb-4">
-                  <Map className="h-6 w-6 text-black mr-2" />
-                  <h3 className="text-lg font-bold text-black">
+                  <Map className="h-6 w-6 text-foreground mr-2" />
+                  <h3 className="text-lg font-bold text-foreground">
                     Workspace Map
                   </h3>
                 </div>
-                <p className="text-sm text-black">
+                <p className="text-sm text-foreground">
                   Configure the workspace layout by clicking cells to toggle
                   between workstations, obstacles, or empty spaces.
                 </p>
@@ -172,7 +172,7 @@ export const Route = createFileRoute("/Configure/map")({
 
               {/* Map Grid */}
               <div className="bg-background p-6 border border-gray-300 rounded-lg">
-                <Label className="text-black font-bold text-sm mb-4 block">
+                <Label className="text-foreground font-bold text-sm mb-4 block">
                   Map Layout
                 </Label>
                 <div className="grid grid-cols-10 gap-1 w-fit">
@@ -195,10 +195,10 @@ export const Route = createFileRoute("/Configure/map")({
               {/* Summary Panel */}
               <div className="bg-background p-6 border border-gray-300 rounded-lg">
                 <div className="flex items-center mb-4">
-                  <Wrench className="h-6 w-6 text-black mr-2" />
-                  <h3 className="text-lg font-bold text-black">Map Summary</h3>
+                  <Wrench className="h-6 w-6 text-foreground mr-2" />
+                  <h3 className="text-lg font-bold text-foreground">Map Summary</h3>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-black">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-foreground">
                   <p>Workstations: {workstationCount}</p>
                   <p>Obstacles: {obstacleCount}</p>
                   <p>
@@ -214,7 +214,7 @@ export const Route = createFileRoute("/Configure/map")({
               <div className="flex justify-center">
                 <Button
                   onClick={handleReset}
-                  className="bg-blue-500 hover:bg-blue-600 text-foreground py-3 px-6 rounded-lg"
+                  className="bg-background-500 hover:bg-background-600 text-foreground py-3 px-6 rounded-lg"
                 >
                   <RefreshCw className="h-5 w-5 mr-2" />
                   Reset Map

@@ -48,7 +48,7 @@ function FleetPage() {
         <div className="text-sm font-normal">
           <Button
             variant="outline"
-            className="text-text hover:bg-blue-600 cursor-pointer"
+            className="text-text hover:bg-background-600 cursor-pointer"
             onClick={() => setIsModalOpen(true)}
           >
             + Add New Robot In Fleet
@@ -59,7 +59,7 @@ function FleetPage() {
       {/* Robot List */}
       <div className="p-4 space-y-4 overflow-auto">
         {robots.length === 0 ? (
-          <p className="text-gray-600">No robots added yet.</p>
+          <p className="text-foreground-600">No robots added yet.</p>
         ) : (
           robots.map((robot) => (
             <div

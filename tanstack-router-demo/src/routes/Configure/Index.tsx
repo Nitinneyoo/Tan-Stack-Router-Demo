@@ -86,7 +86,7 @@ const SortableTask = ({ id, task }: { id: string; task: task }) => {
       {...listeners}
       className="flex items-center p-3 bg-background border border-gray-300 rounded-lg mb-2 cursor-move"
     >
-      <span className="text-black">{task}</span>
+      <span className="text-foreground">{task}</span>
     </div>
   );
 };
@@ -197,7 +197,7 @@ export const Route = createFileRoute("/Configure/Index")({
               <div>
                 <Label
                   htmlFor="operationMode"
-                  className="text-black font-semibold text-lg"
+                  className="text-foreground font-semibold text-lg"
                 >
                   Operation Mode
                 </Label>
@@ -211,7 +211,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.operationMode && "border-red-500"
                       )}
                     >
@@ -224,7 +224,7 @@ export const Route = createFileRoute("/Configure/Index")({
                     </SelectContent>
                   </Select>
                   <Settings
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                     aria-hidden="true"
                   />
                 </div>
@@ -239,7 +239,7 @@ export const Route = createFileRoute("/Configure/Index")({
               <div>
                 <Label
                   htmlFor="taskSchedulingMode"
-                  className="text-black font-semibold text-lg"
+                  className="text-foreground font-semibold text-lg"
                 >
                   Task Scheduling Mode
                 </Label>
@@ -253,7 +253,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.taskSchedulingMode && "border-red-500"
                       )}
                     >
@@ -272,7 +272,7 @@ export const Route = createFileRoute("/Configure/Index")({
                     </SelectContent>
                   </Select>
                   <Clock
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                     aria-hidden="true"
                   />
                 </div>
@@ -287,7 +287,7 @@ export const Route = createFileRoute("/Configure/Index")({
               <div>
                 <Label
                   htmlFor="safetyProtocolMode"
-                  className="text-black font-semibold text-lg"
+                  className="text-foreground font-semibold text-lg"
                 >
                   Safety Protocol Mode
                 </Label>
@@ -301,7 +301,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.safetyProtocolMode && "border-red-500"
                       )}
                     >
@@ -320,7 +320,7 @@ export const Route = createFileRoute("/Configure/Index")({
                     </SelectContent>
                   </Select>
                   <Shield
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                     aria-hidden="true"
                   />
                 </div>
@@ -335,7 +335,7 @@ export const Route = createFileRoute("/Configure/Index")({
               <div>
                 <Label
                   htmlFor="energySavingMode"
-                  className="text-black font-semibold text-lg"
+                  className="text-foreground font-semibold text-lg"
                 >
                   Energy Saving Mode
                 </Label>
@@ -349,7 +349,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-foreground border border-gray-300 rounded-lg",
                         errors.energySavingMode && "border-red-500"
                       )}
                     >
@@ -368,7 +368,7 @@ export const Route = createFileRoute("/Configure/Index")({
                     </SelectContent>
                   </Select>
                   <Battery
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-foreground"
                     aria-hidden="true"
                   />
                 </div>
@@ -383,7 +383,7 @@ export const Route = createFileRoute("/Configure/Index")({
               <div>
                 <Label
                   htmlFor="speedLimit"
-                  className="text-black font-semibold text-lg"
+                  className="text-foreground font-semibold text-lg"
                 >
                   Speed Limit (m/s)
                 </Label>
@@ -399,7 +399,7 @@ export const Route = createFileRoute("/Configure/Index")({
                     step={0.1}
                     className="mt-4"
                   />
-                  <p className="mt-2 text-sm text-black">
+                  <p className="mt-2 text-sm text-foreground">
                     Current: {configData.speedLimit.toFixed(1)} m/s
                   </p>
                 </div>
@@ -412,7 +412,7 @@ export const Route = createFileRoute("/Configure/Index")({
 
               {/* Task Priority */}
               <div>
-                <Label className="text-black font-semibold text-lg">
+                <Label className="text-foreground font-semibold text-lg">
                   Task Priority (Drag to reorder)
                 </Label>
                 <div className="mt-2">
@@ -456,7 +456,7 @@ export const Route = createFileRoute("/Configure/Index")({
               <div className="flex gap-4">
                 <Button
                   type="submit"
-                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-foreground py-3 rounded-lg"
+                  className="flex-1 bg-background-500 hover:bg-background-600 text-foreground py-3 rounded-lg"
                 >
                   <Save className="h-5 w-5 mr-2" />
                   Save Settings
@@ -464,7 +464,7 @@ export const Route = createFileRoute("/Configure/Index")({
                 <Button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 bg-gray-500 hover:bg-gray-600 text-foreground py-3 rounded-lg"
+                  className="flex-1 text-foreground-500 hover:text-foreground-600 text-foreground py-3 rounded-lg"
                 >
                   <RefreshCw className="h-5 w-5 mr-2" />
                   Reset to Default

@@ -88,7 +88,7 @@ const SortableTask = ({ id, task }: { id: string; task: string }) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="flex items-center justify-center px-4 py-2 bg-background border border-gray-300 rounded-md text-black text-sm font-semibold cursor-move"
+      className="flex items-center justify-center px-4 py-2 bg-background border border-gray-300 rounded-md text-foreground text-sm font-semibold cursor-move"
     >
       {task}
     </div>
@@ -212,22 +212,22 @@ export const Route = createFileRoute("/Configure/automation")({
       ];
 
     return (
-      <div className="min-h-screen bg-background text-black">
+      <div className="min-h-screen bg-background text-foreground">
         <div className="flex min-h-[calc(100vh-4rem)]">
           {/* Navbar */}
           <nav
             className={cn(
-              "fixed md:static top-0 left-0 h-full w-64 bg-gray-100 p-4 border-r border-gray-300",
+              "fixed md:static top-0 left-0 h-full w-64 text-foreground-100 p-4 border-r border-gray-300",
               isNavbarOpen ? "block" : "hidden md:block"
             )}
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-black">
+              <h2 className="text-xl font-semibold text-foreground">
                 Automation Dashboard
               </h2>
               <Button
                 variant="ghost"
-                className="md:hidden text-black hover:bg-gray-200"
+                className="md:hidden text-foreground hover:text-foreground-200"
                 onClick={() => setIsNavbarOpen(false)}
               >
                 <X className="h-6 w-6" />
@@ -241,8 +241,8 @@ export const Route = createFileRoute("/Configure/automation")({
                   className={cn(
                     "w-full justify-start text-sm font-semibold",
                     activeSetting === option.key
-                      ? "bg-blue-500 text-foreground"
-                      : "bg-background text-black border-gray-300 hover:bg-gray-200"
+                      ? "bg-background-500 text-foreground"
+                      : "bg-background text-foreground border-gray-300 hover:text-foreground-200"
                   )}
                   onClick={() => {
                     setActiveSetting(option.key);
@@ -260,7 +260,7 @@ export const Route = createFileRoute("/Configure/automation")({
           <div className="flex-1 p-6">
             <Button
               variant="ghost"
-              className="md:hidden mb-4 text-black hover:bg-gray-200"
+              className="md:hidden mb-4 text-foreground hover:text-foreground-200"
               onClick={() => setIsNavbarOpen(true)}
             >
               <Menu className="h-6 w-6" />
@@ -270,8 +270,8 @@ export const Route = createFileRoute("/Configure/automation")({
               {activeSetting === "workflowMode" && (
                 <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
-                    <Cpu className="h-6 w-6 text-black mr-2" />
-                    <h3 className="text-lg font-semibold text-black">
+                    <Cpu className="h-6 w-6 text-foreground mr-2" />
+                    <h3 className="text-lg font-semibold text-foreground">
                       Workflow Mode
                     </h3>
                   </div>
@@ -291,8 +291,8 @@ export const Route = createFileRoute("/Configure/automation")({
                         className={cn(
                           "flex-1 py-2 text-sm font-semibold",
                           configData.workflowMode === mode
-                            ? "bg-blue-500 text-foreground"
-                            : "bg-background text-black border-gray-300 hover:bg-gray-200"
+                            ? "bg-background-500 text-foreground"
+                            : "bg-background text-foreground border-gray-300 hover:text-foreground-200"
                         )}
                         onClick={() => handleChange("workflowMode", mode)}
                       >
@@ -311,8 +311,8 @@ export const Route = createFileRoute("/Configure/automation")({
               {activeSetting === "sensorSensitivity" && (
                 <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
-                    <Gauge className="h-6 w-6 text-black mr-2" />
-                    <h3 className="text-lg font-semibold text-black">
+                    <Gauge className="h-6 w-6 text-foreground mr-2" />
+                    <h3 className="text-lg font-semibold text-foreground">
                       Sensor Sensitivity
                     </h3>
                   </div>
@@ -333,7 +333,7 @@ export const Route = createFileRoute("/Configure/automation")({
                     step={50}
                     className="mt-2"
                   />
-                  <p className="mt-1 text-sm text-black">
+                  <p className="mt-1 text-sm text-foreground">
                     Current: {configData.sensorSensitivity}
                   </p>
                   {errors.sensorSensitivity && (
@@ -347,8 +347,8 @@ export const Route = createFileRoute("/Configure/automation")({
               {activeSetting === "errorHandlingMode" && (
                 <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
-                    <AlertOctagon className="h-6 w-6 text-black mr-2" />
-                    <h3 className="text-lg font-semibold text-black">
+                    <AlertOctagon className="h-6 w-6 text-foreground mr-2" />
+                    <h3 className="text-lg font-semibold text-foreground">
                       Error Handling Mode
                     </h3>
                   </div>
@@ -368,8 +368,8 @@ export const Route = createFileRoute("/Configure/automation")({
                         className={cn(
                           "flex-1 py-2 text-sm font-semibold",
                           configData.errorHandlingMode === mode
-                            ? "bg-blue-500 text-foreground"
-                            : "bg-background text-black border-gray-300 hover:bg-gray-200"
+                            ? "bg-background-500 text-foreground"
+                            : "bg-background text-foreground border-gray-300 hover:text-foreground-200"
                         )}
                         onClick={() => handleChange("errorHandlingMode", mode)}
                       >
@@ -388,8 +388,8 @@ export const Route = createFileRoute("/Configure/automation")({
               {activeSetting === "powerOptimization" && (
                 <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
-                    <BatteryCharging className="h-6 w-6 text-black mr-2" />
-                    <h3 className="text-lg font-semibold text-black">
+                    <BatteryCharging className="h-6 w-6 text-foreground mr-2" />
+                    <h3 className="text-lg font-semibold text-foreground">
                       Power Optimization
                     </h3>
                   </div>
@@ -406,8 +406,8 @@ export const Route = createFileRoute("/Configure/automation")({
                           className={cn(
                             "flex-1 py-2 text-sm font-semibold",
                             configData.powerOptimization === mode
-                              ? "bg-blue-500 text-foreground"
-                              : "bg-background text-black border-gray-300 hover:bg-gray-200"
+                              ? "bg-background-500 text-foreground"
+                              : "bg-background text-foreground border-gray-300 hover:text-foreground-200"
                           )}
                           onClick={() =>
                             handleChange("powerOptimization", mode)
@@ -429,15 +429,15 @@ export const Route = createFileRoute("/Configure/automation")({
               {activeSetting === "movementPrecision" && (
                 <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
-                    <Wrench className="h-6 w-6 text-black mr-2" />
-                    <h3 className="text-lg font-semibold text-black">
+                    <Wrench className="h-6 w-6 text-foreground mr-2" />
+                    <h3 className="text-lg font-semibold text-foreground">
                       Movement Precision (mm)
                     </h3>
                   </div>
                   <div className="flex items-center gap-2">
                     <Button
                       variant="outline"
-                      className="bg-background text-black border-gray-300 hover:bg-gray-200"
+                      className="bg-background text-foreground border-gray-300 hover:text-foreground-200"
                       onClick={() =>
                         handleChange(
                           "movementPrecision",
@@ -459,11 +459,11 @@ export const Route = createFileRoute("/Configure/automation")({
                       min={0.1}
                       max={5}
                       step={0.1}
-                      className="w-16 bg-background text-black border border-gray-300 rounded-md text-center text-sm font-semibold"
+                      className="w-16 bg-background text-foreground border border-gray-300 rounded-md text-center text-sm font-semibold"
                     />
                     <Button
                       variant="outline"
-                      className="bg-background text-black border-gray-300 hover:bg-gray-200"
+                      className="bg-background text-foreground border-gray-300 hover:text-foreground-200"
                       onClick={() =>
                         handleChange(
                           "movementPrecision",
@@ -474,7 +474,7 @@ export const Route = createFileRoute("/Configure/automation")({
                       +
                     </Button>
                   </div>
-                  <p className="mt-1 text-sm text-black">
+                  <p className="mt-1 text-sm text-foreground">
                     Current: {configData.movementPrecision.toFixed(1)} mm
                   </p>
                   {errors.movementPrecision && (
@@ -488,8 +488,8 @@ export const Route = createFileRoute("/Configure/automation")({
               {activeSetting === "taskPriority" && (
                 <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
-                    <Wrench className="h-6 w-6 text-black mr-2" />
-                    <h3 className="text-lg font-semibold text-black">
+                    <Wrench className="h-6 w-6 text-foreground mr-2" />
+                    <h3 className="text-lg font-semibold text-foreground">
                       Task Priority
                     </h3>
                   </div>
@@ -526,12 +526,12 @@ export const Route = createFileRoute("/Configure/automation")({
               {/* Summary Panel */}
               <div className="bg-background p-6 border border-gray-300 rounded-lg">
                 <div className="flex items-center mb-4">
-                  <Wrench className="h-6 w-6 text-black mr-2" />
-                  <h3 className="text-lg font-semibold text-black">
+                  <Wrench className="h-6 w-6 text-foreground mr-2" />
+                  <h3 className="text-lg font-semibold text-foreground">
                     Configuration Summary
                   </h3>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-black">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-foreground">
                   <p>Workflow Mode: {configData.workflowMode}</p>
                   <p>Sensor Sensitivity: {configData.sensorSensitivity}</p>
                   <p>Error Handling: {configData.errorHandlingMode}</p>
@@ -560,14 +560,14 @@ export const Route = createFileRoute("/Configure/automation")({
               <div className="flex gap-4 justify-center">
                 <Button
                   onClick={handleSave}
-                  className="bg-blue-500 hover:bg-blue-600 text-foreground py-3 px-6 rounded-md font-semibold"
+                  className="bg-background-500 hover:bg-background-600 text-foreground py-3 px-6 rounded-md font-semibold"
                 >
                   <Save className="h-5 w-5 mr-2" />
                   Validate
                 </Button>
                 <Button
                   onClick={handleReset}
-                  className="bg-gray-500 hover:bg-gray-600 text-foreground py-3 px-6 rounded-md font-semibold"
+                  className="text-foreground-500 hover:text-foreground-600 text-foreground py-3 px-6 rounded-md font-semibold"
                 >
                   <RefreshCw className="h-5 w-5 mr-2" />
                   Reset

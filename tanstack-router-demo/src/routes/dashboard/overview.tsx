@@ -16,7 +16,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">NextGen Robotics</h1>
         <p className="text-lg md:text-xl mb-6">Revolutionizing automation with cutting-edge technology</p>
-        <Button onClick={() => window.alert('Learn more clicked!')} className="bg-blue-600 hover:bg-blue-700">
+        <Button onClick={() => window.alert('Learn more clicked!')} className="bg-background-600 hover:bg-background-700">
           Explore Now
         </Button>
       </div>
@@ -46,9 +46,9 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-16 text-foreground-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Key Features</h2>
+        <h2 className="text-3xl font-bold text-center text-foreground-800 mb-12">Key Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow">
@@ -80,7 +80,7 @@ const CTA: React.FC = () => {
 // Main RobotOverview component
 const RobotOverview: React.FC = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="text-foreground-50 min-h-screen">
       <Header />
       <Features />
       <CTA />

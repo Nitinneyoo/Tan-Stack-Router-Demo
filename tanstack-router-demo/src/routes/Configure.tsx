@@ -6,21 +6,21 @@ const configureLayout = () => {
       {/* Fixed Header */}
       <div className="h-screen flex flex-col fixed w-full">
         {/* Fixed Header */}
-        <div className="flex justify-between items-center px-6 py-4 border-b bg-gray-200">
-          <h2 className="text-2xl font-bold text-gray-900">Configure Screen</h2>
+        <div className="flex justify-between items-center px-6 py-4 border-b text-foreground-200">
+          <h2 className="text-2xl font-bold text-foreground">Configure Screen</h2>
         </div>
 
         {/* Main Content Area */}
         <div className="flex-1 overflow-hidden">
           <div className="h-full flex">
             {/* Sidebar */}
-            <aside className="w-64 bg-gray-200 shadow-md p-6 flex flex-col border-white">
+            <aside className="w-64 text-foreground-200 shadow-md p-6 flex flex-col border-white">
               <nav className="space-y-2">
                 <ul>
                   <li>
                     <Link
                       to="/configure"
-                      className="block py-2 px-4 rounded-lg text-gray-900 hover:text-blue-600 transition-colors mt-4"
+                      className="block py-2 px-4 rounded-lg text-foreground hover:text-blue-600 transition-colors mt-4"
                       activeOptions={{ exact: true }}
                       activeProps={{
                         className:
@@ -33,7 +33,7 @@ const configureLayout = () => {
                   <li>
                     <Link
                       to="/configure/automation"
-                      className="block py-2 px-4 rounded-lg text-gray-900 hover:text-blue-600  mt-4"
+                      className="block py-2 px-4 rounded-lg text-foreground hover:text-blue-600  mt-4"
                       activeProps={{
                         className:
                           "block py-2 px-4 rounded-lg bg-background text-blue-700 font-semibold border-l-4 border-gray-400",
@@ -45,7 +45,7 @@ const configureLayout = () => {
                   <li>
                     <Link
                       to="/configure/map"
-                      className="block py-2 px-4 rounded-lg text-gray-900 hover:text-blue-600 transition-colors mt-4"
+                      className="block py-2 px-4 rounded-lg text-foreground hover:text-blue-600 transition-colors mt-4"
                       activeProps={{
                         className:
                           "block py-2 px-4 rounded-lg bg-background text-blue-700 font-semibold border-l-4 border-gray-400",

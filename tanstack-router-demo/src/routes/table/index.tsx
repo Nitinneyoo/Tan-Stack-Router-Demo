@@ -101,8 +101,8 @@ const TableData = () => {
 
   return (
     <div>
-      <header className="p-2 bg-gray-200 flex items-center justify-between text-xl font-bold shadow-lg top-0 sticky z-1">
-        <Link to="/Fleet" className="text-gray-900">
+      <header className="p-2 text-foreground-200 flex items-center justify-between text-xl font-bold shadow-lg top-0 sticky z-1">
+        <Link to="/Fleet" className="text-foreground">
           Fleet
         </Link>
         <div className="text-sm font-normal">
@@ -110,7 +110,7 @@ const TableData = () => {
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
-                className="text-gray-900 hover:bg-blue-600 cursor-pointer border-2 !border-gray-400"
+                className="text-foreground hover:bg-background-600 cursor-pointer border-2 !border-gray-400"
               >
                 Filter
               </Button>
@@ -153,7 +153,7 @@ const TableData = () => {
         </div>
       </header>
       <ScrollArea className="h-full w-full rounded-md border p-4">
-        <Table className='text-gray-700 border-collapse border border-gray-300 w-full'>
+        <Table className='text-foreground-700 border-collapse border border-gray-300 w-full'>
           <TableCaption>A list of your Robot Details.</TableCaption>
           <TableHeader className='text-bold text-xl font-serif'>
             {table.getHeaderGroups().map(headerGroup => (

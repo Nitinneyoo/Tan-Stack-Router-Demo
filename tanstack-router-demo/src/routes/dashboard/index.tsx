@@ -53,7 +53,7 @@ const columns = [
       return (
         <div className="flex items-center">
           <div className={`h-2 w-16 rounded ${chargeColor}`} style={{ width: `${charge}%` }}></div>
-          <span className="ml-2 text-black">{charge}%</span>
+          <span className="ml-2 text-foreground">{charge}%</span>
         </div>
       );
     },
@@ -98,7 +98,7 @@ const columns = [
       return (
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="ghost" className="text-black">...</Button>
+            <Button variant="ghost" className="text-foreground">...</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -193,13 +193,13 @@ function RobotHome() {
   const lastIndex = Math.min(currentPage * robotsPerPage, robots.length);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 p-6">
+    <div className="flex flex-col min-h-screen text-foreground-50 p-6">
       {/* Header Section */}
       <div className="flex-shrink-0 mb-4">
         <header className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-black">Robot Home</h1>
+          <h1 className="text-xl font-bold text-foreground">Robot Home</h1>
           <Button
-            className="bg-blue-900 text-foreground hover:bg-blue-800"
+            className="bg-background-900 text-foreground hover:bg-background-800"
             onClick={() => setIsModalOpen(true)}
           >
             + Add New Robot
@@ -209,20 +209,20 @@ function RobotHome() {
         {/* Stats */}
         <div className="flex space-x-4 mt-4">
           <div className="border rounded-lg p-3 bg-background shadow-sm">
-            <p className="text-xs text-black">Total Robots</p>
-            <p className="text-lg font-bold text-black">{totalRobots}</p>
+            <p className="text-xs text-foreground">Total Robots</p>
+            <p className="text-lg font-bold text-foreground">{totalRobots}</p>
           </div>
           <div className="border rounded-lg p-3 bg-background shadow-sm">
-            <p className="text-xs text-black">Active</p>
-            <p className="text-lg font-bold text-black">{activeRobots}</p>
+            <p className="text-xs text-foreground">Active</p>
+            <p className="text-lg font-bold text-foreground">{activeRobots}</p>
           </div>
           <div className="border rounded-lg p-3 bg-background shadow-sm">
-            <p className="text-xs text-black">Inactive</p>
-            <p className="text-lg font-bold text-black">{inactiveRobots}</p>
+            <p className="text-xs text-foreground">Inactive</p>
+            <p className="text-lg font-bold text-foreground">{inactiveRobots}</p>
           </div>
           <div className="border rounded-lg p-3 bg-background shadow-sm">
-            <p className="text-xs text-black">Error</p>
-            <p className="text-lg font-bold text-black">{errorRobots}</p>
+            <p className="text-xs text-foreground">Error</p>
+            <p className="text-lg font-bold text-foreground">{errorRobots}</p>
           </div>
         </div>
       </div>
@@ -236,9 +236,9 @@ function RobotHome() {
             <div className="overflow-auto max-h-[680px] min-h-[680px]">
               <table className="w-full">
                 <ScrollArea className="h-[650px] w-full">
-                  <thead className="sticky top-0 bg-gray-50 border-b z-10">
+                  <thead className="sticky top-0 text-foreground border-b z-10">
                     {table.getHeaderGroups().map(headerGroup => (
-                      <tr key={headerGroup.id} className="text-black">
+                      <tr key={headerGroup.id} className="text-foreground">
                         {headerGroup.headers.map(header => (
                           <th key={header.id} className="p-3 text-left text-xs font-medium uppercase tracking-wider">
                             {flexRender(header.column.columnDef.header, header.getContext())}
@@ -249,9 +249,9 @@ function RobotHome() {
                   </thead>
                   <tbody>
                     {table.getRowModel().rows.map((row, index) => (
-                      <tr key={row.id} className={`border-b hover:bg-gray-50 ${index % 2 === 0 ? 'bg-background' : 'bg-gray-50'}`}>
+                      <tr key={row.id} className={`border-b hover:text-foreground-50 ${index % 2 === 0 ? 'bg-background' : 'text-foreground-50'}`}>
                         {row.getVisibleCells().map(cell => (
-                          <td key={cell.id} className="p-3 text-xs text-black">
+                          <td key={cell.id} className="p-3 text-xs text-foreground">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </td>
                         ))}
@@ -266,13 +266,13 @@ function RobotHome() {
 
         {/* Pagination Section */}
         <div className="mt-2">
-          <div className="flex justify-between items-center py-3 px-4 bg-background border rounded-lg text-xs text-black shadow-sm">
+          <div className="flex justify-between items-center py-3 px-4 bg-background border rounded-lg text-xs text-foreground shadow-sm">
             <div className="flex items-center space-x-2">
               <span>Row per page:</span>
               <select
                 value={robotsPerPage}
                 onChange={(e) => table.setPageSize(Number(e.target.value))}
-                className="border rounded px-2 py-1 text-xs text-black"
+                className="border rounded px-2 py-1 text-xs text-foreground"
               >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
@@ -289,14 +289,14 @@ function RobotHome() {
                 <button
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
-                  className="p-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed text-black"
+                  className="p-1 rounded hover:text-foreground-100 disabled:opacity-50 disabled:cursor-not-allowed text-foreground"
                 >
                   {"<"}
                 </button>
                 <button
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
-                  className="p-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed text-black"
+                  className="p-1 rounded hover:text-foreground-100 disabled:opacity-50 disabled:cursor-not-allowed text-foreground"
                 >
                   {">"}
                 </button>
@@ -308,15 +308,15 @@ function RobotHome() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-background bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-background p-6 rounded-lg w-[90%] max-w-lg shadow-lg relative border border-gray-200">
             <Button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-2 right-2 text-gray-600"
+              className="absolute top-2 right-2 text-foreground-600"
             >
               ✕
             </Button>
-            <h2 className="text-lg font-semibold mb-4 text-black">Add Robot to Fleet</h2>
+            <h2 className="text-lg font-semibold mb-4 text-foreground">Add Robot to Fleet</h2>
             <AddRobotForm onSubmit={handleAddRobot} />
           </div>
         </div>

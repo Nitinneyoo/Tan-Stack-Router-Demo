@@ -110,7 +110,7 @@ export const Route = createRootRoute({
                 "text-foreground",
                 isLoggedIn
                   ? "bg-red-500 hover:bg-red-600"
-                  : "bg-gray-400 opacity-50 cursor-not-allowed"
+                  : "text-foreground-400 opacity-50 cursor-not-allowed"
               )}
             >
               Logout
