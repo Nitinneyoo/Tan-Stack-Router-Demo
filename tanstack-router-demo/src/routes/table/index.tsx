@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
-
+import { ScrollArea } from "@/components/ui/scroll-area"
 interface DataItem {
   id: number;
   "Robot Name": string;
@@ -32,14 +32,14 @@ const TableData = () => {
 
   const data = useMemo(() => {
     if (!filterType || !filterValue) return mData
-    return mData.filter(item => 
+    return mData.filter(item =>
       String((item as DataItem)[filterType]).toLowerCase().includes(filterValue.toLowerCase())
     )
   }, [filterType, filterValue])
 
   const columns = React.useMemo(
     () => [
-      { 
+      {
         header: 'ID',
         accessorKey: 'id',
         footer: 'ID',
@@ -74,7 +74,7 @@ const TableData = () => {
   )
 
   const table = useReactTable({
-    data, 
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     state: {
@@ -118,8 +118,8 @@ const TableData = () => {
             <PopoverContent className="w-80">
               <div className="grid gap-4">
                 <h3 className="font-medium">Filter Options</h3>
-                <select 
-                  value={filterType} 
+                <select
+                  value={filterType}
                   onChange={(e) => setFilterType(e.target.value)}
                   className="border rounded p-2"
                 >
@@ -152,42 +152,44 @@ const TableData = () => {
           </Popover>
         </div>
       </header>
-      <Table className='text-gray-700 border-collapse border border-gray-300 w-full'>
-        <TableCaption>A list of your Robot Details.</TableCaption>
-        <TableHeader className='text-bold text-xl font-serif'>
-          {table.getHeaderGroups().map(headerGroup => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map(header => (
-                <TableHead key={header.id}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.map(row => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <TableHead key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          {table.getFooterGroups().map(footerGroup => (
-            <TableRow key={footerGroup.id}>
-              {footerGroup.headers.map(header => (
-                <TableHead key={header.id}>
-                  {flexRender(header.column.columnDef.footer, header.getContext())}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableFooter>
-      </Table>
+      <ScrollArea className="h-full w-full rounded-md border p-4">
+        <Table className='text-gray-700 border-collapse border border-gray-300 w-full'>
+          <TableCaption>A list of your Robot Details.</TableCaption>
+          <TableHeader className='text-bold text-xl font-serif'>
+            {table.getHeaderGroups().map(headerGroup => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map(header => (
+                  <TableHead key={header.id}>
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map(row => (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map(cell => (
+                  <TableHead key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            {table.getFooterGroups().map(footerGroup => (
+              <TableRow key={footerGroup.id}>
+                {footerGroup.headers.map(header => (
+                  <TableHead key={header.id}>
+                    {flexRender(header.column.columnDef.footer, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableFooter>
+        </Table>
+      </ScrollArea>
     </div>
   )
 }

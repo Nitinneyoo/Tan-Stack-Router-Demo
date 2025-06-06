@@ -91,7 +91,7 @@ const SortableTask = ({ id, task }: { id: string; task: task }) => {
   );
 };
 
-export const Route = createFileRoute("/configure/")({
+export const Route = createFileRoute("/Configure/Index")({
   component: () => {
     const [configData, setConfigData] = useState<ConfigData>(() => {
       const saved = localStorage.getItem("fleetConfig");

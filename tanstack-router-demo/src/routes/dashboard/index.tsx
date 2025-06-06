@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import AddRobotForm from "./addRobot";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -66,8 +67,8 @@ const columns = [
         status === "ACTIVE"
           ? "bg-green-100 text-green-800"
           : status === "INACTIVE"
-          ? "bg-orange-100 text-orange-800"
-          : "bg-red-100 text-red-800";
+            ? "bg-orange-100 text-orange-800"
+            : "bg-red-100 text-red-800";
       return <span className={`px-2 py-1 rounded ${statusColor}`}>{status}</span>;
     },
   },
@@ -108,7 +109,7 @@ const columns = [
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction 
+              <AlertDialogAction
                 onClick={() => handleDeleteRobot && handleDeleteRobot(robot.id)}
                 className="bg-red-500 text-white hover:bg-red-600"
               >
@@ -135,6 +136,21 @@ function RobotHome() {
     { id: "TRI00258", type: "Tugger", location: "WAYPOINT 4", charge: 100, status: "ACTIVE", connectivity: "Connected" },
     { id: "TRI00259", type: "Tugger", location: "TRI00259", charge: 50, status: "ERROR", connectivity: "Disconnected" },
     { id: "TRI00260", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00261", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00262", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00263", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00264", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00265", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00266", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00267", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00268", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00269", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00270", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00271", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00272", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00273", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00274", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
+    { id: "TRI00275", type: "Tugger", location: "Calling Station 12", charge: 80, status: "ACTIVE", connectivity: "Connected" },
   ]);
 
   const totalRobots = robots.length;
@@ -217,41 +233,43 @@ function RobotHome() {
         <div className="border rounded-lg bg-white shadow-sm">
           <div className="relative">
             {/* Table with Fixed Header and Scrollable Body */}
-            <div className="overflow-auto max-h-[400px]">
+            <div className="overflow-auto max-h-[680px] min-h-[680px]">
               <table className="w-full">
-                <thead className="sticky top-0 bg-gray-50 border-b">
-                  {table.getHeaderGroups().map(headerGroup => (
-                    <tr key={headerGroup.id} className="text-black">
-                      {headerGroup.headers.map(header => (
-                        <th key={header.id} className="p-3 text-left text-xs font-medium uppercase tracking-wider">
-                          {flexRender(header.column.columnDef.header, header.getContext())}
-                        </th>
-                      ))}
-                    </tr>
-                  ))}
-                </thead>
-                <tbody>
-                  {table.getRowModel().rows.map((row, index) => (
-                    <tr key={row.id} className={`border-b hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-                      {row.getVisibleCells().map(cell => (
-                        <td key={cell.id} className="p-3 text-xs text-black">
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
+                <ScrollArea className="h-[650px] w-full">
+                  <thead className="sticky top-0 bg-gray-50 border-b z-10">
+                    {table.getHeaderGroups().map(headerGroup => (
+                      <tr key={headerGroup.id} className="text-black">
+                        {headerGroup.headers.map(header => (
+                          <th key={header.id} className="p-3 text-left text-xs font-medium uppercase tracking-wider">
+                            {flexRender(header.column.columnDef.header, header.getContext())}
+                          </th>
+                        ))}
+                      </tr>
+                    ))}
+                  </thead>
+                  <tbody>
+                    {table.getRowModel().rows.map((row, index) => (
+                      <tr key={row.id} className={`border-b hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                        {row.getVisibleCells().map(cell => (
+                          <td key={cell.id} className="p-3 text-xs text-black">
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </ScrollArea>
               </table>
             </div>
           </div>
         </div>
 
         {/* Pagination Section */}
-        <div className="mt-4">
+        <div className="mt-2">
           <div className="flex justify-between items-center py-3 px-4 bg-white border rounded-lg text-xs text-black shadow-sm">
             <div className="flex items-center space-x-2">
               <span>Row per page:</span>
-              <select 
+              <select
                 value={robotsPerPage}
                 onChange={(e) => table.setPageSize(Number(e.target.value))}
                 className="border rounded px-2 py-1 text-xs text-black"
@@ -261,12 +279,12 @@ function RobotHome() {
                 <option value={20}>20</option>
               </select>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <span>
                 {firstIndex}-{lastIndex} of {robots.length}
               </span>
-              
+
               <div className="flex items-center space-x-1">
                 <button
                   onClick={() => table.previousPage()}

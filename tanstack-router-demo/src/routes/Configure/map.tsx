@@ -44,7 +44,7 @@ const MapCell = ({
   );
 };
 
-export const Route = createFileRoute("/configure/map")({
+export const Route = createFileRoute("/Configure/map")({
   component: () => {
     const [mapData, setMapData] = useState<MapData>(INITIAL_MAP);
     const [selectedCell, setSelectedCell] = useState<{

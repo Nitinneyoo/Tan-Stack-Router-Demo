@@ -95,7 +95,7 @@ const SortableTask = ({ id, task }: { id: string; task: string }) => {
   );
 };
 
-export const Route = createFileRoute("/configure/automation")({
+export const Route = createFileRoute("/Configure/automation")({
   component: () => {
     const [configData, setConfigData] =
       useState<AutomationData>(DEFAULT_CONFIG);

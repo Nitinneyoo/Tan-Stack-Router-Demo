@@ -69,6 +69,6 @@ const configureLayout = () => {
   );
 };
 
-export const Route = createFileRoute("/configure")({
+export const Route = createFileRoute("/Configure")({
   component: configureLayout,
 });
