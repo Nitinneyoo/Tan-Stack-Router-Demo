@@ -4,12 +4,12 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 const HomePage = () => {
   // const auth = useAuth();
   return (
-    <div  className="min-h-screen bg-gray-100 text-gray-800">
+    <div className="min-h-screen bg-gray-100 text-gray-800">
       {/* Hero Section */}
       <header className="bg-text shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <h1 className="text-3xl font-bold text-blue-600">Anscer Robotics</h1>
-         
+
         </div>
       </header>
 
@@ -22,7 +22,7 @@ const HomePage = () => {
           </p>
           <Link
             to="/Fleet"
-            className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700"
+            className="inline-block px-6 py-3 bg-blue-600 text-foreground font-semibold rounded-xl shadow hover:bg-blue-700"
           >
             Explore Fleet
           </Link>
@@ -30,7 +30,7 @@ const HomePage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center">
           <div className="p-6 shadow-lg rounded-2xl bg-blue-50">
             <h3 className="text-2xl font-semibold text-blue-700 mb-2">Advanced Navigation</h3>
@@ -48,19 +48,19 @@ const HomePage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-primary text-white text-center">
+      <section className="py-16 bg-primary text-foreground text-center">
         <h2 className="text-3xl font-bold mb-4">Ready to Automate with AnsCer?</h2>
         <p className="text-lg mb-6">Get in touch with us and discover how we can help revolutionize your operations.</p>
         <Link
           to="/Contact"
-          className="inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow hover:bg-gray-100"
+          className="inline-block px-6 py-3 bg-background text-blue-600 font-semibold rounded-xl shadow hover:bg-gray-100"
         >
           Contact Us
         </Link>
       </section>
 
       {/* Footer */}
-      <footer className="bg-white py-6 border-t mt-10">
+      <footer className="bg-background py-6 border-t mt-10">
         <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
           &copy; {new Date().getFullYear()} AnsCer Robotics. All rights reserved.
         </div>
@@ -72,6 +72,6 @@ const HomePage = () => {
 export const Route = createFileRoute('/')({
   component: HomePage,
 });
- 
+
 
 export default HomePage;

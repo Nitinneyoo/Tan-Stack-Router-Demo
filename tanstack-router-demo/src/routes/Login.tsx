@@ -146,9 +146,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black">
+    <div className="min-h-screen flex flex-col bg-background text-black">
       <main className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg">
+        <div className="max-w-md w-full bg-background p-8 border border-gray-300 rounded-lg">
           <h2 className="text-3xl font-bold text-black text-center">
             ANSCER Robotics
           </h2>
@@ -175,7 +175,7 @@ const LoginPage = () => {
                       onChange={handleLoginChange}
                       placeholder="Your email"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.email && "border-red-500"
                       )}
                     />
@@ -201,7 +201,7 @@ const LoginPage = () => {
                       onChange={handleLoginChange}
                       placeholder="Your password"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.password && "border-red-500"
                       )}
                     />
@@ -220,7 +220,7 @@ const LoginPage = () => {
                 <div>
                   <Button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-foreground py-3 rounded-lg"
                   >
                     Login
                   </Button>
@@ -242,7 +242,7 @@ const LoginPage = () => {
                       onChange={handleSignupChange}
                       placeholder="Your email"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.email && "border-red-500"
                       )}
                     />
@@ -268,7 +268,7 @@ const LoginPage = () => {
                       onChange={handleSignupChange}
                       placeholder="Your password"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.password && "border-red-500"
                       )}
                     />
@@ -294,7 +294,7 @@ const LoginPage = () => {
                       onChange={handleSignupChange}
                       placeholder="Confirm your password"
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.confirmPassword && "border-red-500"
                       )}
                     />
@@ -315,7 +315,7 @@ const LoginPage = () => {
                 <div>
                   <Button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-foreground py-3 rounded-lg"
                   >
                     Sign Up
                   </Button>

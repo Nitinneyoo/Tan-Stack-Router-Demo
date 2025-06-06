@@ -107,7 +107,7 @@ export const Route = createRootRoute({
               onClick={handleLogout}
               disabled={!isLoggedIn}
               className={cn(
-                "text-white",
+                "text-foreground",
                 isLoggedIn
                   ? "bg-red-500 hover:bg-red-600"
                   : "bg-gray-400 opacity-50 cursor-not-allowed"
@@ -123,7 +123,7 @@ export const Route = createRootRoute({
     );
   },
   notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-text
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-text
     ">
       <h1 className="text-4xl font-bold">404 - Page Not Found</h1>
       <p className="mt-2">The page you are looking for does not exist.</p>

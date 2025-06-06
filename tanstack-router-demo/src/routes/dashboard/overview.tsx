@@ -12,7 +12,7 @@ interface Feature {
 // Header component
 const Header: React.FC = () => {
   return (
-    <header className="bg-primary text-white py-16">
+    <header className="bg-primary text-foreground py-16">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">NextGen Robotics</h1>
         <p className="text-lg md:text-xl mb-6">Revolutionizing automation with cutting-edge technology</p>
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     </header>
   );
 };
-  
+
 // Features section
 const Features: React.FC = () => {
   const features: Feature[] = [
@@ -67,7 +67,7 @@ const Features: React.FC = () => {
 // Call-to-Action section
 const CTA: React.FC = () => {
   return (
-    <section className="py-16 bg-primary text-white">
+    <section className="py-16 bg-primary text-foreground">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Workflow?</h2>
         <p className="text-lg mb-6">Join the robotics revolution today and unlock endless possibilities.</p>

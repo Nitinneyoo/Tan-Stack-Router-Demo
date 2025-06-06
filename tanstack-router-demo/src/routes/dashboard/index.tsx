@@ -111,7 +111,7 @@ const columns = [
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => handleDeleteRobot && handleDeleteRobot(robot.id)}
-                className="bg-red-500 text-white hover:bg-red-600"
+                className="bg-red-500 text-foreground hover:bg-red-600"
               >
                 Delete
               </AlertDialogAction>
@@ -199,7 +199,7 @@ function RobotHome() {
         <header className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-black">Robot Home</h1>
           <Button
-            className="bg-blue-900 text-white hover:bg-blue-800"
+            className="bg-blue-900 text-foreground hover:bg-blue-800"
             onClick={() => setIsModalOpen(true)}
           >
             + Add New Robot
@@ -208,19 +208,19 @@ function RobotHome() {
 
         {/* Stats */}
         <div className="flex space-x-4 mt-4">
-          <div className="border rounded-lg p-3 bg-white shadow-sm">
+          <div className="border rounded-lg p-3 bg-background shadow-sm">
             <p className="text-xs text-black">Total Robots</p>
             <p className="text-lg font-bold text-black">{totalRobots}</p>
           </div>
-          <div className="border rounded-lg p-3 bg-white shadow-sm">
+          <div className="border rounded-lg p-3 bg-background shadow-sm">
             <p className="text-xs text-black">Active</p>
             <p className="text-lg font-bold text-black">{activeRobots}</p>
           </div>
-          <div className="border rounded-lg p-3 bg-white shadow-sm">
+          <div className="border rounded-lg p-3 bg-background shadow-sm">
             <p className="text-xs text-black">Inactive</p>
             <p className="text-lg font-bold text-black">{inactiveRobots}</p>
           </div>
-          <div className="border rounded-lg p-3 bg-white shadow-sm">
+          <div className="border rounded-lg p-3 bg-background shadow-sm">
             <p className="text-xs text-black">Error</p>
             <p className="text-lg font-bold text-black">{errorRobots}</p>
           </div>
@@ -230,7 +230,7 @@ function RobotHome() {
       {/* Table and Pagination Container */}
       <div className="flex flex-col">
         {/* Table Container */}
-        <div className="border rounded-lg bg-white shadow-sm">
+        <div className="border rounded-lg bg-background shadow-sm">
           <div className="relative">
             {/* Table with Fixed Header and Scrollable Body */}
             <div className="overflow-auto max-h-[680px] min-h-[680px]">
@@ -249,7 +249,7 @@ function RobotHome() {
                   </thead>
                   <tbody>
                     {table.getRowModel().rows.map((row, index) => (
-                      <tr key={row.id} className={`border-b hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                      <tr key={row.id} className={`border-b hover:bg-gray-50 ${index % 2 === 0 ? 'bg-background' : 'bg-gray-50'}`}>
                         {row.getVisibleCells().map(cell => (
                           <td key={cell.id} className="p-3 text-xs text-black">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -266,7 +266,7 @@ function RobotHome() {
 
         {/* Pagination Section */}
         <div className="mt-2">
-          <div className="flex justify-between items-center py-3 px-4 bg-white border rounded-lg text-xs text-black shadow-sm">
+          <div className="flex justify-between items-center py-3 px-4 bg-background border rounded-lg text-xs text-black shadow-sm">
             <div className="flex items-center space-x-2">
               <span>Row per page:</span>
               <select
@@ -309,7 +309,7 @@ function RobotHome() {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg w-[90%] max-w-lg shadow-lg relative border border-gray-200">
+          <div className="bg-background p-6 rounded-lg w-[90%] max-w-lg shadow-lg relative border border-gray-200">
             <Button
               onClick={() => setIsModalOpen(false)}
               className="absolute top-2 right-2 text-gray-600"

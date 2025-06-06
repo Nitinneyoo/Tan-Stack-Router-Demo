@@ -86,7 +86,7 @@ const ContactPage = () => {
   // FloatingDock items with navigation
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black">
+    <div className="min-h-screen flex flex-col bg-background text-black">
       {/* Header */}
       <header className="bg-primary border-b border-gray-300">
         <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
@@ -112,7 +112,7 @@ const ContactPage = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="space-y-8 bg-white p-8 sm:p-12 border border-gray-300 rounded-lg"
+          className="space-y-8 bg-background p-8 sm:p-12 border border-gray-300 rounded-lg"
         >
           {/* Name Field */}
           <div>
@@ -128,7 +128,7 @@ const ContactPage = () => {
                 onChange={handleChange}
                 placeholder="Your name"
                 className={cn(
-                  "pl-12 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg text-base sm:text-lg overflow-hidden ",
+                  "pl-12 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg text-base sm:text-lg overflow-hidden ",
                   errors.name && "border-red-500"
                 )}
               />
@@ -158,7 +158,7 @@ const ContactPage = () => {
                 onChange={handleChange}
                 placeholder="Your email"
                 className={cn(
-                  "pl-12 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg text-base sm:text-lg",
+                  "pl-12 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg text-base sm:text-lg",
                   errors.email && "border-red-500"
                 )}
               />
@@ -191,7 +191,7 @@ const ContactPage = () => {
                 placeholder="Tell us about your needs or inquiries"
                 rows={5}
                 className={cn(
-                  "pl-12 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg text-base sm:text-lg",
+                  "pl-12 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg text-base sm:text-lg",
                   errors.message && "border-red-500"
                 )}
               />
@@ -223,7 +223,7 @@ const ContactPage = () => {
           <div>
             <Button
               type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-semibold text-lg"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-foreground py-3 sm:py-4 rounded-lg font-semibold text-lg"
             >
               Send Message
             </Button>
@@ -233,7 +233,7 @@ const ContactPage = () => {
 
       {/* Footer */}
       <footer className="py-0">
-        <div className="bg-primary text-white py-10 px-5">
+        <div className="bg-primary text-foreground py-10 px-5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Column 1 - Logo and Socials */}
             <div>

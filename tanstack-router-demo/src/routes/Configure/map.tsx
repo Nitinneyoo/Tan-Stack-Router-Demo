@@ -101,13 +101,13 @@ export const Route = createFileRoute("/Configure/map")({
     ];
 
     return (
-      <div className="min-h-screen bg-white text-black">
+      <div className="min-h-screen bg-background text-black">
         {/* Main Layout */}
         <div className="flex min-h-[calc(100vh-4rem)]">
           {/* Navbar */}
           <nav
             className={cn(
-              "fixed md:static top-0 left-0 h-full w-64 bg-white border-r border-gray-300 p-4 z-0",
+              "fixed md:static top-0 left-0 h-full w-64 bg-background border-r border-gray-300 p-4 z-0",
               isNavbarOpen ? "block" : "hidden md:block"
             )}
           >
@@ -133,8 +133,8 @@ export const Route = createFileRoute("/Configure/map")({
                     className={cn(
                       "w-full justify-start text-sm font-bold",
                       window.location.pathname === option.path
-                        ? "bg-blue-500 text-white"
-                        : "bg-white text-black border-gray-300 hover:bg-gray-200"
+                        ? "bg-blue-500 text-foreground"
+                        : "bg-background text-black border-gray-300 hover:bg-gray-200"
                     )}
                     onClick={() => setIsNavbarOpen(false)}
                   >
@@ -157,7 +157,7 @@ export const Route = createFileRoute("/Configure/map")({
             </Button>
             <div className="max-w-2xl mx-auto flex flex-col gap-6">
               {/* Map Header */}
-              <div className="bg-white p-6 border border-gray-300 rounded-lg">
+              <div className="bg-background p-6 border border-gray-300 rounded-lg">
                 <div className="flex items-center mb-4">
                   <Map className="h-6 w-6 text-black mr-2" />
                   <h3 className="text-lg font-bold text-black">
@@ -171,7 +171,7 @@ export const Route = createFileRoute("/Configure/map")({
               </div>
 
               {/* Map Grid */}
-              <div className="bg-white p-6 border border-gray-300 rounded-lg">
+              <div className="bg-background p-6 border border-gray-300 rounded-lg">
                 <Label className="text-black font-bold text-sm mb-4 block">
                   Map Layout
                 </Label>
@@ -193,7 +193,7 @@ export const Route = createFileRoute("/Configure/map")({
               </div>
 
               {/* Summary Panel */}
-              <div className="bg-white p-6 border border-gray-300 rounded-lg">
+              <div className="bg-background p-6 border border-gray-300 rounded-lg">
                 <div className="flex items-center mb-4">
                   <Wrench className="h-6 w-6 text-black mr-2" />
                   <h3 className="text-lg font-bold text-black">Map Summary</h3>
@@ -214,7 +214,7 @@ export const Route = createFileRoute("/Configure/map")({
               <div className="flex justify-center">
                 <Button
                   onClick={handleReset}
-                  className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg"
+                  className="bg-blue-500 hover:bg-blue-600 text-foreground py-3 px-6 rounded-lg"
                 >
                   <RefreshCw className="h-5 w-5 mr-2" />
                   Reset Map

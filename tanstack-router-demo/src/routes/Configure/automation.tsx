@@ -88,7 +88,7 @@ const SortableTask = ({ id, task }: { id: string; task: string }) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-md text-black text-sm font-semibold cursor-move"
+      className="flex items-center justify-center px-4 py-2 bg-background border border-gray-300 rounded-md text-black text-sm font-semibold cursor-move"
     >
       {task}
     </div>
@@ -179,40 +179,40 @@ export const Route = createFileRoute("/Configure/automation")({
       label: string;
       icon: React.ReactNode;
     }[] = [
-      {
-        key: "workflowMode",
-        label: "Workflow Mode",
-        icon: <Cpu className="h-5 w-5 mr-2" />,
-      },
-      {
-        key: "sensorSensitivity",
-        label: "Sensor Sensitivity",
-        icon: <Gauge className="h-5 w-5 mr-2" />,
-      },
-      {
-        key: "errorHandlingMode",
-        label: "Error Handling",
-        icon: <AlertOctagon className="h-5 w-5 mr-2" />,
-      },
-      {
-        key: "powerOptimization",
-        label: "Power Optimization",
-        icon: <BatteryCharging className="h-5 w-5 mr-2" />,
-      },
-      {
-        key: "movementPrecision",
-        label: "Movement Precision",
-        icon: <Wrench className="h-5 w-5 mr-2" />,
-      },
-      {
-        key: "taskPriority",
-        label: "Task Priority",
-        icon: <Wrench className="h-5 w-5 mr-2" />,
-      },
-    ];
+        {
+          key: "workflowMode",
+          label: "Workflow Mode",
+          icon: <Cpu className="h-5 w-5 mr-2" />,
+        },
+        {
+          key: "sensorSensitivity",
+          label: "Sensor Sensitivity",
+          icon: <Gauge className="h-5 w-5 mr-2" />,
+        },
+        {
+          key: "errorHandlingMode",
+          label: "Error Handling",
+          icon: <AlertOctagon className="h-5 w-5 mr-2" />,
+        },
+        {
+          key: "powerOptimization",
+          label: "Power Optimization",
+          icon: <BatteryCharging className="h-5 w-5 mr-2" />,
+        },
+        {
+          key: "movementPrecision",
+          label: "Movement Precision",
+          icon: <Wrench className="h-5 w-5 mr-2" />,
+        },
+        {
+          key: "taskPriority",
+          label: "Task Priority",
+          icon: <Wrench className="h-5 w-5 mr-2" />,
+        },
+      ];
 
     return (
-      <div className="min-h-screen bg-white text-black">
+      <div className="min-h-screen bg-background text-black">
         <div className="flex min-h-[calc(100vh-4rem)]">
           {/* Navbar */}
           <nav
@@ -241,8 +241,8 @@ export const Route = createFileRoute("/Configure/automation")({
                   className={cn(
                     "w-full justify-start text-sm font-semibold",
                     activeSetting === option.key
-                      ? "bg-blue-500 text-white"
-                      : "bg-white text-black border-gray-300 hover:bg-gray-200"
+                      ? "bg-blue-500 text-foreground"
+                      : "bg-background text-black border-gray-300 hover:bg-gray-200"
                   )}
                   onClick={() => {
                     setActiveSetting(option.key);
@@ -268,7 +268,7 @@ export const Route = createFileRoute("/Configure/automation")({
             <div className="max-w-2xl mx-auto flex flex-col gap-6">
               {/* Setting Controls */}
               {activeSetting === "workflowMode" && (
-                <div className="bg-white p-6 border border-gray-300 rounded-lg">
+                <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
                     <Cpu className="h-6 w-6 text-black mr-2" />
                     <h3 className="text-lg font-semibold text-black">
@@ -291,8 +291,8 @@ export const Route = createFileRoute("/Configure/automation")({
                         className={cn(
                           "flex-1 py-2 text-sm font-semibold",
                           configData.workflowMode === mode
-                            ? "bg-blue-500 text-white"
-                            : "bg-white text-black border-gray-300 hover:bg-gray-200"
+                            ? "bg-blue-500 text-foreground"
+                            : "bg-background text-black border-gray-300 hover:bg-gray-200"
                         )}
                         onClick={() => handleChange("workflowMode", mode)}
                       >
@@ -309,7 +309,7 @@ export const Route = createFileRoute("/Configure/automation")({
               )}
 
               {activeSetting === "sensorSensitivity" && (
-                <div className="bg-white p-6 border border-gray-300 rounded-lg">
+                <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
                     <Gauge className="h-6 w-6 text-black mr-2" />
                     <h3 className="text-lg font-semibold text-black">
@@ -345,7 +345,7 @@ export const Route = createFileRoute("/Configure/automation")({
               )}
 
               {activeSetting === "errorHandlingMode" && (
-                <div className="bg-white p-6 border border-gray-300 rounded-lg">
+                <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
                     <AlertOctagon className="h-6 w-6 text-black mr-2" />
                     <h3 className="text-lg font-semibold text-black">
@@ -368,8 +368,8 @@ export const Route = createFileRoute("/Configure/automation")({
                         className={cn(
                           "flex-1 py-2 text-sm font-semibold",
                           configData.errorHandlingMode === mode
-                            ? "bg-blue-500 text-white"
-                            : "bg-white text-black border-gray-300 hover:bg-gray-200"
+                            ? "bg-blue-500 text-foreground"
+                            : "bg-background text-black border-gray-300 hover:bg-gray-200"
                         )}
                         onClick={() => handleChange("errorHandlingMode", mode)}
                       >
@@ -386,7 +386,7 @@ export const Route = createFileRoute("/Configure/automation")({
               )}
 
               {activeSetting === "powerOptimization" && (
-                <div className="bg-white p-6 border border-gray-300 rounded-lg">
+                <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
                     <BatteryCharging className="h-6 w-6 text-black mr-2" />
                     <h3 className="text-lg font-semibold text-black">
@@ -406,8 +406,8 @@ export const Route = createFileRoute("/Configure/automation")({
                           className={cn(
                             "flex-1 py-2 text-sm font-semibold",
                             configData.powerOptimization === mode
-                              ? "bg-blue-500 text-white"
-                              : "bg-white text-black border-gray-300 hover:bg-gray-200"
+                              ? "bg-blue-500 text-foreground"
+                              : "bg-background text-black border-gray-300 hover:bg-gray-200"
                           )}
                           onClick={() =>
                             handleChange("powerOptimization", mode)
@@ -427,7 +427,7 @@ export const Route = createFileRoute("/Configure/automation")({
               )}
 
               {activeSetting === "movementPrecision" && (
-                <div className="bg-white p-6 border border-gray-300 rounded-lg">
+                <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
                     <Wrench className="h-6 w-6 text-black mr-2" />
                     <h3 className="text-lg font-semibold text-black">
@@ -437,7 +437,7 @@ export const Route = createFileRoute("/Configure/automation")({
                   <div className="flex items-center gap-2">
                     <Button
                       variant="outline"
-                      className="bg-white text-black border-gray-300 hover:bg-gray-200"
+                      className="bg-background text-black border-gray-300 hover:bg-gray-200"
                       onClick={() =>
                         handleChange(
                           "movementPrecision",
@@ -459,11 +459,11 @@ export const Route = createFileRoute("/Configure/automation")({
                       min={0.1}
                       max={5}
                       step={0.1}
-                      className="w-16 bg-white text-black border border-gray-300 rounded-md text-center text-sm font-semibold"
+                      className="w-16 bg-background text-black border border-gray-300 rounded-md text-center text-sm font-semibold"
                     />
                     <Button
                       variant="outline"
-                      className="bg-white text-black border-gray-300 hover:bg-gray-200"
+                      className="bg-background text-black border-gray-300 hover:bg-gray-200"
                       onClick={() =>
                         handleChange(
                           "movementPrecision",
@@ -486,7 +486,7 @@ export const Route = createFileRoute("/Configure/automation")({
               )}
 
               {activeSetting === "taskPriority" && (
-                <div className="bg-white p-6 border border-gray-300 rounded-lg">
+                <div className="bg-background p-6 border border-gray-300 rounded-lg">
                   <div className="flex items-center mb-4">
                     <Wrench className="h-6 w-6 text-black mr-2" />
                     <h3 className="text-lg font-semibold text-black">
@@ -524,7 +524,7 @@ export const Route = createFileRoute("/Configure/automation")({
               )}
 
               {/* Summary Panel */}
-              <div className="bg-white p-6 border border-gray-300 rounded-lg">
+              <div className="bg-background p-6 border border-gray-300 rounded-lg">
                 <div className="flex items-center mb-4">
                   <Wrench className="h-6 w-6 text-black mr-2" />
                   <h3 className="text-lg font-semibold text-black">
@@ -560,14 +560,14 @@ export const Route = createFileRoute("/Configure/automation")({
               <div className="flex gap-4 justify-center">
                 <Button
                   onClick={handleSave}
-                  className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-md font-semibold"
+                  className="bg-blue-500 hover:bg-blue-600 text-foreground py-3 px-6 rounded-md font-semibold"
                 >
                   <Save className="h-5 w-5 mr-2" />
                   Validate
                 </Button>
                 <Button
                   onClick={handleReset}
-                  className="bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-md font-semibold"
+                  className="bg-gray-500 hover:bg-gray-600 text-foreground py-3 px-6 rounded-md font-semibold"
                 >
                   <RefreshCw className="h-5 w-5 mr-2" />
                   Reset

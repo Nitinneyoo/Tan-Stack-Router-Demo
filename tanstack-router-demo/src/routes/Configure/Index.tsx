@@ -84,7 +84,7 @@ const SortableTask = ({ id, task }: { id: string; task: task }) => {
       style={style}
       {...attributes}
       {...listeners}
-      className="flex items-center p-3 bg-white border border-gray-300 rounded-lg mb-2 cursor-move"
+      className="flex items-center p-3 bg-background border border-gray-300 rounded-lg mb-2 cursor-move"
     >
       <span className="text-black">{task}</span>
     </div>
@@ -189,9 +189,9 @@ export const Route = createFileRoute("/Configure/Index")({
     };
 
     return (
-      <div className="min-h-screen bg-white text-black p-0">
+      <div className="min-h-screen bg-background text-foreground p-0">
         <main className=" w-full h-full">
-          <div className="bg-white p-8 border border-gray-300">
+          <div className="bg-background p-8 border border-gray-300">
             <form onSubmit={handleSave} className="space-y-8">
               {/* Operation Mode */}
               <div>
@@ -211,7 +211,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.operationMode && "border-red-500"
                       )}
                     >
@@ -253,7 +253,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.taskSchedulingMode && "border-red-500"
                       )}
                     >
@@ -301,7 +301,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.safetyProtocolMode && "border-red-500"
                       )}
                     >
@@ -349,7 +349,7 @@ export const Route = createFileRoute("/Configure/Index")({
                   >
                     <SelectTrigger
                       className={cn(
-                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        "pl-10 pr-4 py-3 bg-background text-black border border-gray-300 rounded-lg",
                         errors.energySavingMode && "border-red-500"
                       )}
                     >
@@ -456,7 +456,7 @@ export const Route = createFileRoute("/Configure/Index")({
               <div className="flex gap-4">
                 <Button
                   type="submit"
-                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg"
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-foreground py-3 rounded-lg"
                 >
                   <Save className="h-5 w-5 mr-2" />
                   Save Settings
@@ -464,7 +464,7 @@ export const Route = createFileRoute("/Configure/Index")({
                 <Button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg"
+                  className="flex-1 bg-gray-500 hover:bg-gray-600 text-foreground py-3 rounded-lg"
                 >
                   <RefreshCw className="h-5 w-5 mr-2" />
                   Reset to Default

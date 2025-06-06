@@ -24,7 +24,7 @@ const configureLayout = () => {
                       activeOptions={{ exact: true }}
                       activeProps={{
                         className:
-                          "block py-2 px-4 rounded-lg bg-white text-blue-700 font-semibold border-l-4 border-gray-400",
+                          "block py-2 px-4 rounded-lg bg-background text-blue-700 font-semibold border-l-4 border-gray-400",
                       }}
                     >
                       Data
@@ -36,7 +36,7 @@ const configureLayout = () => {
                       className="block py-2 px-4 rounded-lg text-gray-900 hover:text-blue-600  mt-4"
                       activeProps={{
                         className:
-                          "block py-2 px-4 rounded-lg bg-white text-blue-700 font-semibold border-l-4 border-gray-400",
+                          "block py-2 px-4 rounded-lg bg-background text-blue-700 font-semibold border-l-4 border-gray-400",
                       }}
                     >
                       Automation
@@ -48,7 +48,7 @@ const configureLayout = () => {
                       className="block py-2 px-4 rounded-lg text-gray-900 hover:text-blue-600 transition-colors mt-4"
                       activeProps={{
                         className:
-                          "block py-2 px-4 rounded-lg bg-white text-blue-700 font-semibold border-l-4 border-gray-400",
+                          "block py-2 px-4 rounded-lg bg-background text-blue-700 font-semibold border-l-4 border-gray-400",
                       }}
                     >
                       Map

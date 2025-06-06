@@ -20,7 +20,7 @@ interface Setting {
 // Header component
 const Header: React.FC = () => {
   return (
-    <header className="bg-primary text-white py-16">
+    <header className="bg-primary text-foreground py-16">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Settings</h1>
         <p className="text-lg md:text-xl mb-6">Customize your robotics experience</p>

@@ -85,7 +85,7 @@ function AddRobotForm({ onSubmit }: AddRobotFormProps) {
           </SelectContent>
         </Select>
       </div>
-      <Button type="submit" className="bg-blue-900 text-white w-full">
+      <Button type="submit" className="bg-blue-900 text-foreground w-full">
         Add Robot
       </Button>
     </form>
