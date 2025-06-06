@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { User, Mail } from "lucide-react";
 import { z } from "zod";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // WARNING: Hardcoded credentials and client-side auth are for TESTING ONLY. Remove before production!
 const DEFAULT_CREDENTIALS = {
@@ -36,7 +37,6 @@ type SignupData = z.infer<typeof signupSchema>;
 type FormErrors = Partial<Record<keyof SignupData, string>>;
 
 const LoginPage = () => {
-  const [isSignup, setIsSignup] = useState(false);
   const [loginData, setLoginData] = useState<LoginData>({
     email: "",
     password: "",
@@ -99,7 +99,6 @@ const LoginPage = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: FormErrors = {};
-        // biome-ignore lint/complexity/noForEach: <explanation>
         error.errors.forEach((err) => {
           if (err.path[0]) {
             newErrors[err.path[0] as keyof LoginData] = err.message;
@@ -134,7 +133,6 @@ const LoginPage = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: FormErrors = {};
-        // biome-ignore lint/complexity/noForEach: <explanation>
         error.errors.forEach((err) => {
           if (err.path[0]) {
             newErrors[err.path[0] as keyof SignupData] = err.message;
@@ -149,154 +147,182 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-black">
-      {/* Main Content */}
       <main className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg">
           <h2 className="text-3xl font-bold text-black text-center">
-            {isSignup
-              ? "Sign Up for ANSCER Robotics"
-              : "Login to ANSCER Robotics"}
+            ANSCER Robotics
           </h2>
           <p className="mt-2 text-center text-sm text-black">
-            {isSignup
-              ? "Create your account to join the automation revolution."
-              : "Access your account to explore our solutions."}
+            Access your account or join the automation revolution.
           </p>
-
-          {/* Form */}
-          <form
-            onSubmit={isSignup ? handleSignup : handleLogin}
-            className="mt-6 space-y-6"
-          >
-            {/* Email Field */}
-            <div>
-              <Label htmlFor="email" className="text-black font-semibold">
-                Email
-              </Label>
-              <div className="mt-2 relative">
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={isSignup ? signupData.email : loginData.email}
-                  onChange={isSignup ? handleSignupChange : handleLoginChange}
-                  placeholder="Your email"
-                  className={cn(
-                    "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
-                    errors.email && "border-red-500"
+          <Tabs defaultValue="login" className="mt-6">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="login">Login</TabsTrigger>
+              <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            </TabsList>
+            <TabsContent value="login">
+              <form onSubmit={handleLogin} className="mt-6 space-y-6">
+                <div>
+                  <Label htmlFor="login-email" className="text-black font-semibold">
+                    Email
+                  </Label>
+                  <div className="mt-2 relative">
+                    <Input
+                      id="login-email"
+                      name="email"
+                      type="email"
+                      value={loginData.email}
+                      onChange={handleLoginChange}
+                      placeholder="Your email"
+                      className={cn(
+                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        errors.email && "border-red-500"
+                      )}
+                    />
+                    <Mail
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="mt-2 text-sm text-red-500">{errors.email}</p>
                   )}
-                />
-                <Mail
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
-                  aria-hidden="true"
-                />
-              </div>
-              {errors.email && (
-                <p className="mt-2 text-sm text-red-500">{errors.email}</p>
-              )}
-            </div>
-
-            {/* Password Field */}
-            <div>
-              <Label htmlFor="password" className="text-black font-semibold">
-                Password
-              </Label>
-              <div className="mt-2 relative">
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={isSignup ? signupData.password : loginData.password}
-                  onChange={isSignup ? handleSignupChange : handleLoginChange}
-                  placeholder="Your password"
-                  className={cn(
-                    "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
-                    errors.password && "border-red-500"
-                  )}
-                />
-                <User
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
-                  aria-hidden="true"
-                />
-              </div>
-              {errors.password && (
-                <p className="mt-2 text-sm text-red-500">{errors.password}</p>
-              )}
-            </div>
-
-            {/* Confirm Password (Signup Only) */}
-            {isSignup && (
-              <div>
-                <Label
-                  htmlFor="confirmPassword"
-                  className="text-black font-semibold"
-                >
-                  Confirm Password
-                </Label>
-                <div className="mt-2 relative">
-                  <Input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    value={signupData.confirmPassword}
-                    onChange={handleSignupChange}
-                    placeholder="Confirm your password"
-                    className={cn(
-                      "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
-                      errors.confirmPassword && "border-red-500"
-                    )}
-                  />
-                  <User
-                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
-                    aria-hidden="true"
-                  />
                 </div>
-                {errors.confirmPassword && (
-                  <p className="mt-2 text-sm text-red-500">
-                    {errors.confirmPassword}
-                  </p>
+                <div>
+                  <Label htmlFor="login-password" className="text-black font-semibold">
+                    Password
+                  </Label>
+                  <div className="mt-2 relative">
+                    <Input
+                      id="login-password"
+                      name="password"
+                      type="password"
+                      value={loginData.password}
+                      onChange={handleLoginChange}
+                      placeholder="Your password"
+                      className={cn(
+                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        errors.password && "border-red-500"
+                      )}
+                    />
+                    <User
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  {errors.password && (
+                    <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+                  )}
+                </div>
+                {authError && (
+                  <p className="text-sm text-red-500 text-center">{authError}</p>
                 )}
-              </div>
-            )}
-
-            {/* Auth Error */}
-            {authError && (
-              <p className="text-sm text-red-500 text-center">{authError}</p>
-            )}
-
-            {/* Submit Button */}
-            <div>
-              <Button
-                type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg"
-              >
-                {isSignup ? "Sign Up" : "Login"}
-              </Button>
-            </div>
-          </form>
-
-          {/* Toggle Signup/Login */}
-          <div className="mt-4 text-center">
-            <p className="text-sm text-black">
-              {isSignup ? "Already have an account?" : "Don't have an account?"}
-              <Button
-                onClick={() => {
-                  setIsSignup(!isSignup);
-                  setErrors({});
-                  setAuthError(null);
-                  setLoginData({ email: "", password: "" });
-                  setSignupData({
-                    email: "",
-                    password: "",
-                    confirmPassword: "",
-                  });
-                }}
-                className="ml-1 text-blue-500 hover:text-blue-600 font-semibold bg-white border-2"
-              >
-                {isSignup ? "Login" : "Sign Up"}
-              </Button>
-            </p>
-          </div>
+                <div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg"
+                  >
+                    Login
+                  </Button>
+                </div>
+              </form>
+            </TabsContent>
+            <TabsContent value="signup">
+              <form onSubmit={handleSignup} className="mt-6 space-y-6">
+                <div>
+                  <Label htmlFor="signup-email" className="text-black font-semibold">
+                    Email
+                  </Label>
+                  <div className="mt-2 relative">
+                    <Input
+                      id="signup-email"
+                      name="email"
+                      type="email"
+                      value={signupData.email}
+                      onChange={handleSignupChange}
+                      placeholder="Your email"
+                      className={cn(
+                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        errors.email && "border-red-500"
+                      )}
+                    />
+                    <Mail
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="signup-password" className="text-black font-semibold">
+                    Password
+                  </Label>
+                  <div className="mt-2 relative">
+                    <Input
+                      id="signup-password"
+                      name="password"
+                      type="password"
+                      value={signupData.password}
+                      onChange={handleSignupChange}
+                      placeholder="Your password"
+                      className={cn(
+                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        errors.password && "border-red-500"
+                      )}
+                    />
+                    <User
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  {errors.password && (
+                    <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="confirmPassword" className="text-black font-semibold">
+                    Confirm Password
+                  </Label>
+                  <div className="mt-2 relative">
+                    <Input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type="password"
+                      value={signupData.confirmPassword}
+                      onChange={handleSignupChange}
+                      placeholder="Confirm your password"
+                      className={cn(
+                        "pl-10 pr-4 py-3 bg-white text-black border border-gray-300 rounded-lg",
+                        errors.confirmPassword && "border-red-500"
+                      )}
+                    />
+                    <User
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  {errors.confirmPassword && (
+                    <p className="mt-2 text-sm text-red-500">
+                      {errors.confirmPassword}
+                    </p>
+                  )}
+                </div>
+                {authError && (
+                  <p className="text-sm text-red-500 text-center">{authError}</p>
+                )}
+                <div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg"
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+              </form>
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
     </div>

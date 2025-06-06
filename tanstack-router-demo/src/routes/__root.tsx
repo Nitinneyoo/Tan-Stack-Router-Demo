@@ -3,6 +3,7 @@ import { createRootRoute, Link, Outlet, useNavigate, redirect } from "@tanstack/
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export const Route = createRootRoute({
   beforeLoad: async ({ location }) => {
@@ -74,6 +75,9 @@ export const Route = createRootRoute({
           <Link to="/" className="text-text font-bold text-2xl">
             ANSCER Robotics PVT LTD
           </Link>
+          <div>
+            <ModeToggle />
+          </div>
           <div className="flex gap-4 mr-2 justify-center items-center">
             <Link to="/" className="[&.active]:font-bold text-text
              hover:underline">
