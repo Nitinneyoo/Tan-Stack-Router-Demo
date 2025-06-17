@@ -103,6 +103,10 @@ export const Route = createRootRoute({
              hover:underline">
               Table
             </Link>
+            <Link to="/New" className="[&.active]:font-bold text-text
+             hover:underline">
+              New
+            </Link>
             <Button
               onClick={handleLogout}
               disabled={!isLoggedIn}

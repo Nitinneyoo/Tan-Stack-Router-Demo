@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
+import { Route as NewImport } from './routes/New'
 import { Route as LoginImport } from './routes/Login'
 import { Route as FleetImport } from './routes/Fleet'
 import { Route as ContactImport } from './routes/Contact'
@@ -35,6 +36,12 @@ import { Route as ConfigureIndexImport } from './routes/Configure/Index'
 const DashboardRoute = DashboardImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NewRoute = NewImport.update({
+  id: '/New',
+  path: '/New',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -184,6 +191,13 @@ declare module '@tanstack/react-router' {
       path: '/Login'
       fullPath: '/Login'
       preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/New': {
+      id: '/New'
+      path: '/New'
+      fullPath: '/New'
+      preLoaderRoute: typeof NewImport
       parentRoute: typeof rootRoute
     }
     '/dashboard': {
@@ -342,6 +356,7 @@ export interface FileRoutesByFullPath {
   '/Contact': typeof ContactRoute
   '/Fleet': typeof FleetRouteWithChildren
   '/Login': typeof LoginRoute
+  '/New': typeof NewRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/Configure/Index': typeof ConfigureIndexRoute
   '/Configure/automation': typeof ConfigureAutomationRoute
@@ -361,6 +376,7 @@ export interface FileRoutesByTo {
   '/Configure': typeof ConfigureRouteWithChildren
   '/Contact': typeof ContactRoute
   '/Login': typeof LoginRoute
+  '/New': typeof NewRoute
   '/Configure/Index': typeof ConfigureIndexRoute
   '/Configure/automation': typeof ConfigureAutomationRoute
   '/Configure/map': typeof ConfigureMapRoute
@@ -382,6 +398,7 @@ export interface FileRoutesById {
   '/Contact': typeof ContactRoute
   '/Fleet': typeof FleetRouteWithChildren
   '/Login': typeof LoginRoute
+  '/New': typeof NewRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/Configure/Index': typeof ConfigureIndexRoute
   '/Configure/automation': typeof ConfigureAutomationRoute
@@ -405,6 +422,7 @@ export interface FileRouteTypes {
     | '/Contact'
     | '/Fleet'
     | '/Login'
+    | '/New'
     | '/dashboard'
     | '/Configure/Index'
     | '/Configure/automation'
@@ -423,6 +441,7 @@ export interface FileRouteTypes {
     | '/Configure'
     | '/Contact'
     | '/Login'
+    | '/New'
     | '/Configure/Index'
     | '/Configure/automation'
     | '/Configure/map'
@@ -442,6 +461,7 @@ export interface FileRouteTypes {
     | '/Contact'
     | '/Fleet'
     | '/Login'
+    | '/New'
     | '/dashboard'
     | '/Configure/Index'
     | '/Configure/automation'
@@ -464,6 +484,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FleetRoute: typeof FleetRouteWithChildren
   LoginRoute: typeof LoginRoute
+  NewRoute: typeof NewRoute
   DashboardRoute: typeof DashboardRouteWithChildren
 }
 
@@ -474,6 +495,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FleetRoute: FleetRouteWithChildren,
   LoginRoute: LoginRoute,
+  NewRoute: NewRoute,
   DashboardRoute: DashboardRouteWithChildren,
 }
 
@@ -493,6 +515,7 @@ export const routeTree = rootRoute
         "/Contact",
         "/Fleet",
         "/Login",
+        "/New",
         "/dashboard"
       ]
     },
@@ -526,6 +549,9 @@ export const routeTree = rootRoute
     },
     "/Login": {
       "filePath": "Login.tsx"
+    },
+    "/New": {
+      "filePath": "New.tsx"
     },
     "/dashboard": {
       "filePath": "dashboard.tsx",
